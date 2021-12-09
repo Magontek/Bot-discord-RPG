@@ -41,7 +41,6 @@ module.exports = class Game{
     }
 
     crearPersonaje(nombre, nombreClase, historia){
-        console.log(this.buscarClase(nombreClase, historia))
         const claseDePersonaje = this.buscarClase(nombreClase, historia)
         if (!claseDePersonaje) return console.error(`no existe la clase ${nombreClase}`);
         return new Personaje(nombre, 
