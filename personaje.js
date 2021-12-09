@@ -1,4 +1,4 @@
-class Personaje{
+module.exports = class Personaje{
     constructor(nombre, items, maxItems, poderes, maxPoderes, nombreClase){
         this.nombre = nombre
         this.experiencia =0
