@@ -14,8 +14,8 @@ module.exports = class Game{
     del objeto narrativa y lo almacena en un nuevo elemento del array partidas junto con el user 
     y guild que devuelve discord.js y el personaje.
     Solo puede haber una partida para cada par user guild.*/
-    crearNarrativa(guildID,userId,nombreHistoria,personaje){
-        const narrativa = cargarHistoria(nombreHistoria)
+    crearNarrativa(guildId,userId,nombreHistoria,personaje){
+        const narrativa = this.cargarHistoria(nombreHistoria)
         this.partidas.push([ guildId , userId , narrativa, personaje])
         return narrativa
     };
@@ -36,32 +36,54 @@ module.exports = class Game{
         return this.partidas.filter(element => element.userId==userId && element.guildId==guildId);
     };
 
+    personajeDe(userId, guildId){
+        return this.partidaDe(userId, guildId).personaje
+    }
+
     crearPersonaje(nombre, nombreClase, historia){
-        const claseDePersonaje = this.clasesDePersonaje(historia).find(element => element.nombre = nombreClase)
-        if (!claseDePersonaje) console.error("no existe la clase");
+        console.log(this.buscarClase(nombreClase, historia))
+        const claseDePersonaje = this.buscarClase(nombreClase, historia)
+        if (!claseDePersonaje) return console.error(`no existe la clase ${nombreClase}`);
         return new Personaje(nombre, 
-                            clasesDePersonaje.items, 
-                            clasesDePersonaje.maxItems, 
-                            clasesDePersonaje.poderes, 
-                            clasesDePersonaje.maxPoderes, 
-                            clase
+                            claseDePersonaje.itemInicial, 
+                            claseDePersonaje.maxItems, 
+                            claseDePersonaje.poderInicial, 
+                            claseDePersonaje.maxPoderes, 
+                            claseDePersonaje.nombre
                             );
     }
 
+    buscarClase(nombreClase, historia){
+        return this.clasesDePersonaje(historia).find(element => element.nombre == nombreClase)
+    }
+
+    /*
+        nombreDeClase : Str
+        itemInicial : Arry(Obj(item))
+        MaxItems : Int
+        poderInicial : Array(Obj(Poder))
+        MaxPoderes : Int
+    */
     clasesDePersonaje(historia){
-        return 
+        return [{ //maqueta
+                nombre: 'clase',
+                itemInicial: [], 
+                maxItems: 2, 
+                poderInicial: [], 
+                maxPoderes: 2, 
+                }]
     }
 
     getParcial(userId, guildId){
-        let parcial = this.parciales.find(element => element.userID==userId && element.guildID==guildId)
+        let parcial = this.parciales.find(element => element.userID==userId && element.guildID == guildId)
         if (!parcial){
             parcial = ({userID : userId, 
                         guildID : guildId, 
                         nombrePersonaje : '', 
-                        clase : '', 
+                        clasePersonaje : '', 
                         nombreHistoria : ''});
             this.parciales.push(parcial)
-            console.log('Creando parcial nuevo...')
+            console.log('Creando nuevo personaje parcial...')
         }
         return parcial
     }
@@ -72,3 +94,6 @@ module.exports = class Game{
                 this.getParcial(userId, guildId).nombreHistoria);
     }
 };
+
+//const game = new Game()
+//console.log(game.buscarClase('clase', 'historia'))

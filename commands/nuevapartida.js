@@ -2,6 +2,8 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed, Interaction } = require("discord.js");
 const Game = require('../game.js')
+const Personaje = require('../personaje.js')
+const DicordGameHelper = require('../helpers/discordGameHelper.js')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -51,18 +53,19 @@ module.exports = {
             game.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria = nombreHistoria
         };
         if(game.parcialCompleto(interaction.user.id, interaction.guild.id)){
-            const personaje = Game.crearPersonaje(nombrePersonaje, clasePersonaje, nombreHistoria)
+            console.log('Creando personaje...')
+            const parcial = game.getParcial(interaction.user.id, interaction.guild.id)
+            const personaje = game.crearPersonaje(parcial.nombrePersonaje, parcial.clasePersonaje, parcial.nombreHistoria)
             game.crearNarrativa(interaction.guild_id , interaction.user, nombreHistoria, personaje)
-            return interaction.reply("Personaje Completado! \n Nombre: " + game.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje + '\n Historia: ' +  
-                                    game.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria + '\n Clase: ' +  
-                                    game.getParcial(interaction.user.id, interaction.guild.id).clasePersonaje
-                                    );
+            const embedPersonaje = DicordGameHelper.embedPersonaje(personaje)
+            return interaction.reply({ embeds: [embedPersonaje] }
+                                    );//{ embeds: [embed] }
         };
         //console.log("returnde de getparcial: " + game.getParcial(interaction.user.id, interaction.guild.id))
         
-        return interaction.reply("Creando Personaje...\n Nombre: " + game.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje + '\n Historia: ' + 
+        return interaction.reply({ content: 'Creando Personaje...\n Nombre: ' + game.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje + '\n Historia: ' + 
                                 game.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria + '\n Clase: ' + 
                                 game.getParcial(interaction.user.id, interaction.guild.id).clasePersonaje
-                                );
+                                , ephemeral: true });
     },
 };
