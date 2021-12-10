@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Narrativa = require('./narrativa.js')
 const Personaje = require('./personaje.js')
+const Evento = require('./evento.js')
 
 // Esta clase es la que se usa para interactuar con la narrativa. 
 module.exports = class Game{
@@ -14,10 +15,13 @@ module.exports = class Game{
     del objeto narrativa y lo almacena en un nuevo elemento del array partidas junto con el user 
     y guild que devuelve discord.js y el personaje.
     Solo puede haber una partida para cada par user guild.*/
-    crearNarrativa(guildId,userId,nombreHistoria,personaje){
+    crearPartida(guildId,userId,nombreHistoria,personaje){
         const narrativa = this.cargarHistoria(nombreHistoria)
-        this.partidas.push([ guildId , userId , narrativa, personaje])
-        return narrativa
+        this.partidas.push({guildId: guildId, 
+                            userId: userId, 
+                            narrativa:narrativa, 
+                            personaje:personaje
+                            })
     };
     /*Lista todos los nombres de las carpetas dentro de la carpeta historias. 
     Y toma la descripcion del archivos narrativa.JSON*/
@@ -28,7 +32,8 @@ module.exports = class Game{
     };
 
     cargarHistoria(nombre){
-        return //Objeto narrativa
+        const evento = new Evento()
+        return new Narrativa('Una Narrativa',evento,clasesDePersonaje(nombre))//Objeto narrativa
     }
 
     /*Retorna el objeto narrativo que corresponde a ese user y guild.*/

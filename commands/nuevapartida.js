@@ -42,21 +42,24 @@ module.exports = {
     async execute(interaction, game) {
         const nombrePersonaje = interaction.options.getString('nombre');
         if (nombrePersonaje){
+            console.log(`Personaje: ${nombrePersonaje}`)
             game.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje = nombrePersonaje
         };
         const clasePersonaje = interaction.options.getString('clase');
         if (clasePersonaje){
+            console.log(`Clase ${clasePersonaje}`)
             game.getParcial(interaction.user.id, interaction.guild.id).clasePersonaje = clasePersonaje
         };
         const nombreHistoria = interaction.options.getString('historia');
         if (nombreHistoria){
+            console.log(`Historia: ${nombreHistoria}`)
             game.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria = nombreHistoria
         };
         if(game.parcialCompleto(interaction.user.id, interaction.guild.id)){
             console.log('Creando personaje...')
             const parcial = game.getParcial(interaction.user.id, interaction.guild.id)
             const personaje = game.crearPersonaje(parcial.nombrePersonaje, parcial.clasePersonaje, parcial.nombreHistoria)
-            game.crearNarrativa(interaction.guild_id , interaction.user, nombreHistoria, personaje)
+            game.crearPartida(interaction.guild_id , interaction.user, nombreHistoria, personaje)
             const embedPersonaje = DicordGameHelper.embedPersonaje(personaje)
             return interaction.reply({ embeds: [embedPersonaje] }
                                     );//{ embeds: [embed] }

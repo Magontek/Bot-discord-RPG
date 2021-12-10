@@ -1,19 +1,20 @@
 //Esta clase es la interfaz de los eventos. Siempre apunta al evento actual y va actualizando ese evento en función de las opciones elegidas.
 module.exports = class Narrativa{
-    constructor(enunciado,eventoActual,clasesDePersonaje){
+    constructor(nombre,enunciado,eventoActual){
         this.enunciado = enunciado
         this.eventoActual = eventoActual
     }
     //Llama a eventoActual.SelecionarOpcion(int) y retorna el resultado.
-    SelecionarOpcion(int){
-        return 'Resultado de elegir opcion'
+    selecionarOpcion(index){
+        this.eventoActual = this.eventoActual.selecionaOpcion(index)
+        return;
     }
     //Retorna eventoActual.enunciado
-    describirEvento(){
-        return 'Descripcion del evento'
+    describirEvento(personaje){
+        return this.eventoActual.enunciado
     }
     //Llama a eventoActual.imprimirOpciones(personaje) y retorna el resultado
-    ImprimirOpciones(personaje){
-        return ['Opcion1','Opcion2']
+    imprimirOpciones(personaje){
+        return this.eventoActual.opciones(personaje)
     }
 }
