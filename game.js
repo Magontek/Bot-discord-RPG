@@ -19,8 +19,8 @@ module.exports = class Game{
         const narrativa = this.cargarHistoria(nombreHistoria)
         this.partidas.push({guildId: guildId, 
                             userId: userId, 
-                            narrativa:narrativa, 
-                            personaje:personaje
+                            narrativa: narrativa, 
+                            personaje: personaje
                             })
     };
     /*Lista todos los nombres de las carpetas dentro de la carpeta historias. 
@@ -33,12 +33,17 @@ module.exports = class Game{
 
     cargarHistoria(nombre){
         const evento = new Evento()
-        return new Narrativa('Una Narrativa',evento,clasesDePersonaje(nombre))//Objeto narrativa
+        const narrativa = new Narrativa('Una Narrativa',evento,this.clasesDePersonaje(nombre))//Objeto narrativa
+        evento.narrativa = narrativa
+        return narrativa
     }
 
     /*Retorna el objeto narrativo que corresponde a ese user y guild.*/
     partidaDe(userId, guildId){
-        return this.partidas.filter(element => element.userId==userId && element.guildId==guildId);
+        const partida = this.partidas.filter(element => element.userId==userId && element.guildId==guildId);
+        const nombre = partida.personaje.nombre
+		console.log(`Partida: ${nombre}`)
+        return 
     };
 
     personajeDe(userId, guildId){

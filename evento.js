@@ -1,11 +1,11 @@
-class Evento{
-    constructor(nombre,narativa){
+module.exports = class Evento{
+    constructor(){
         this.nombre = 'Evento1'
-        this.narrativa = narrativa
+        this.narrativa = null
         this.enunciado = 'Este es un evento, wiii'
         this.efectoNecesario = null
         this.oculto =false
-        this.consecuencias = [self,self,self,self]
+        this.consecuencias = [this,this,this,this]
     }
     selecionaOpcion(index){
         return this.consecuencias.at(index)

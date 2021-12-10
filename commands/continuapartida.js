@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageButton  } = require("discord.js");
+const Game = require('../game.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -7,7 +8,7 @@ module.exports = {
 		.setDescription('Continuar la partida'),
 	async execute(interaction,game) {
 		const partida = game.partidaDe( interaction.user , interaction.guild_id)
-		const opciones = partida.narrativa.imprimirOpciones(personaje)
+		//const opciones = partida.narrativa.imprimirOpciones(personaje)
         const row = new MessageActionRow()
 			.addComponents(
 				new MessageButton()
