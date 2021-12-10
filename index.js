@@ -22,7 +22,9 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
 	if (interaction.isButton()){
-		console.log(interaction.customId);
+		if(interaction.customId=='eliminarpartida'){
+			game.eliminarPartida( interaction.user, interaction.guild_id )
+		}
 		return interaction.reply({content: `Apretaste el boton ${interaction.customId}`, ephemeral: true});
 	};
 	

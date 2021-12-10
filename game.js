@@ -92,6 +92,21 @@ module.exports = class Game{
                 this.getParcial(userId, guildId).clasePersonaje && 
                 this.getParcial(userId, guildId).nombreHistoria);
     }
+
+    eliminarPartida(userId, guildId){
+        const index = this.indiceDePartidaDe(userId, guildId)
+        this.eliminarPartidaIndice(index)
+    }
+
+    eliminarPartidaIndice(indice){
+        if (index > -1) {
+            array.splice(index, 1);
+        }
+    }
+
+    indiceDePartidaDe(userId, guildId){
+        return this.partidas.findIndex(element => element.userId==userId && element.guildId==guildId)
+    }
 };
 
 //const game = new Game()

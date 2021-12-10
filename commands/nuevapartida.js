@@ -60,9 +60,7 @@ module.exports = {
             const embedPersonaje = DicordGameHelper.embedPersonaje(personaje)
             return interaction.reply({ embeds: [embedPersonaje] }
                                     );//{ embeds: [embed] }
-        };
-        //console.log("returnde de getparcial: " + game.getParcial(interaction.user.id, interaction.guild.id))
-        
+        };        
         return interaction.reply({ content: 'Creando Personaje...\n Nombre: ' + game.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje + '\n Historia: ' + 
                                 game.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria + '\n Clase: ' + 
                                 game.getParcial(interaction.user.id, interaction.guild.id).clasePersonaje

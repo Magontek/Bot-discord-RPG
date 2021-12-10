@@ -3,8 +3,19 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('terminarpartida')
-		.setDescription('Beep!'),
+		.setDescription('¿Terminar partida?'),
 	async execute(interaction) {
-		return interaction.reply('Boop!');
+		const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setCustomId("cancelar")
+                .setLabel("Cancelar")
+                .setStyle("PRIMARY"),
+            new MessageButton()
+                .setCustomId("eliminarpartida")
+                .setLabel("Eliminar")
+                .setStyle("SECONDARY"),
+		);
+		return interaction.reply({content: "Main menu", ephemeral: true, components: [row]});
 	},
 };
