@@ -34,10 +34,11 @@ class Personaje {
     }
 
     agregarItem(item){ 
-
         if(esPosibleAgregari(item)){
-            this.items.push(item) 
+            this.items.push(item)
+            return true
         }
+        return false
     }
     esPosibleAgregari(item){
         return maxItems > cantidadDeItems()     

@@ -43,27 +43,26 @@ module.exports = {
         const nombreHistoria = interaction.options.getString('historia');
         if (nombreHistoria){
             console.log(`Historia: ${nombreHistoria}`)
-            game.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria = nombreHistoria
+            game.nombreParcial(nombreHistoria)
         };
         const clasePersonaje = interaction.options.getString('clase');
         if (clasePersonaje){
             console.log(`Clase ${clasePersonaje}`)
-            game.getParcial(interaction.user.id, interaction.guild.id).clasePersonaje = clasePersonaje
+            game.claseParcial(clasePersonaje)
         };
         const nombrePersonaje = interaction.options.getString('nombre');
         if (nombrePersonaje){
             console.log(`Personaje: ${nombrePersonaje}`)
-            game.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje = nombrePersonaje
+            game.nombreParcial(clasePersonaje)
         };
         
         if(game.parcialCompleto(interaction.user.id, interaction.guild.id)){
             console.log('Creando personaje...')
-            const parcial = game.getParcial(interaction.user.id, interaction.guild.id)
-            const personaje = game.crearPersonaje(parcial.nombrePersonaje, parcial.clasePersonaje, parcial.nombreHistoria)
+            const personaje = game.parcial2Personaje(interaction.user.id, interaction.guild.id)
             if(!personaje) return interaction.reply({ content: "error: no existe la clase" , ephemeral: true});
             if(!game.crearPartida(interaction.guild_id , interaction.user, nombreHistoria, personaje)){
                 return interaction.reply({ content: "error: no existe la historia" , ephemeral: true});
-            } 
+            }
             const embedPersonaje = DicordGameHelper.embedPersonaje(personaje)
             return interaction.reply({ embeds: [embedPersonaje] , ephemeral: true });
         };

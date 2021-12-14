@@ -18,4 +18,8 @@ module.export = class Narrativa
 	imprimirOpciones(personaje){
         this.eventoActual.opciones(personaje)
     }
+
+	pasarAEvento(evento){
+		this.narrativa.eventoActual = evento
+	}
 }

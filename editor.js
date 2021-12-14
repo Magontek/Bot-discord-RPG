@@ -1,12 +1,13 @@
 const fs = require('fs');
-const Personaje  = require ('./clasesRPG.js');
-const ObjetoUsable = require ('./clasesRPG.js');    
-const Efecto  = require ('./clasesRPG.js');
-const Puerta = require ('./clasesRPG.js');
-const Cofre  = require ('./clasesRPG.js');
-const Enemigo = require ('./clasesRPG.js');
-const Habitacion  = require ('./clasesRPG.js');
-const Narrativa = require ('./clasesRPG.js');
+const Personaje  = require ('./Personaje.js');
+const ObjetoUsable = require ('./ObjetoUsable.js');    
+const Efecto  = require ('./Efecto.js');
+const Puerta = require ('./Puerta.js');
+const Cofre  = require ('./Cofre.js');
+const Enemigo = require ('./Enemigo.js');
+const Habitacion  = require ('./Habitacion.js');
+const Narrativa = require ('./Narrativa.js');
+const ClaseDePersonaje = require('./ClaseDePersonaje.js')
 
 module.exports = class Editor {
     constructor (narrativa, eventos, clases, enemigos, efectos, objetos) {
@@ -103,20 +104,15 @@ module.exports = class Editor {
     makeDummy(){
         //Efectos de la historia //nombre id, si ataca nombre es ataque.
         var ataqueConEspada = new Efecto ("ataque", 5, 10)
-        var defensaConEspada = new Efecto("Defenderse con espada", 1, 5)
-        var atacarConEscudo = new Efecto("Atacar con el Escudo", 1, 7)
-        var defensaConEscudo = new Efecto("Defenderse con Escudo", 10, 10)
-        var resistencia = new Efecto("Usar Resistencia Corporal", 3, 100)
-        var ataqueConArmaMala = new Efecto("Ataque debil", 2, 1)
+        var defensaConEspada = new Efecto("defensa", 1, 5)
+        var atacarConEscudo = new Efecto("ataque", 1, 7)
+        var defensaConEscudo = new Efecto("defensa", 10, 10)
+        var ataqueConArmaMala = new Efecto("ataque", 2, 1)
         var percepcion = new Efecto("Estas atento", 0, 20)
-        var abrirCerraduraPesada = new Efecto("Abriste la cerradura", 0, 1)
+        var abrirCerraduraPesada = new Efecto("Abriste la cerradura", 40, 1)
         var locura = new Efecto("Causar locura", 30, 30)
 
         //Objetos de la historia
-        //Objs iniciales
-        var espadaSimple = new ObjetoUsable("Espada corta", 11, [ataqueConEspada, defensaConEspada], "Item", "Guerrero")
-        var escudoSimple = new ObjetoUsable("Cuerpo trabajadp", 13, [resistencia], "Poder", "Guerrero")  
-        var observador = new ObjetoUsable("Observador", 15, percepcion, "Poder", "Cualquiera")
 
         //Objs que puede encontrar
         var escudo = new ObjetoUsable("Escudo debil", 12, [atacarConEscudo, defensaConEscudo], "Item", "Guerreo")
@@ -131,17 +127,27 @@ module.exports = class Editor {
         var enemigoFuerte = new Personaje("Cthulhu", 103, 50, [], 0, [menteDeDios], 1, "Enemigo" )
 
         //Eventos. (Leer la descripcion)
-        var entrada = new Puerta("Puerta de madera", 201,  "Vas a entrar a la mazmorra", null, false, [primerEnemigo], true, 0) //tiene que ser id = 0
-        var primerEnemigo = new Enemigo("Aventurero Asustado", 202, "El asustadiso hombre te reta", null, false, [habitacionSombria, cofreOculto], enemigoDebil)
-        var cofreOculto = new Cofre("Cofre escondido", 203,  "Encuentras el tesoro del infeliz", [percepcion], true, habitacionSombria, true, 20, [llave])
-        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 203,  "Despues de matar al infeliz estas en una habitacion misteriorsa", [], false, [puertaHs1, puertaHs2])
-        var puertaHs1 = new Puerta("Puerta de acero quebradizo", 205,  "Puerta dañada", [ataqueConEspada], false, enemigoFuerte, false, 6)
-        var puertaHs2 = new Puerta("Puerta de acero reforzado", 206,  "hay una puerta inrompible", [abrirCerraduraPesada], false, cofreEscondido, false, 25)
-        var enemigoFuerte = new Enemigo("Bicho recien despierto", 207,  "Despertaste a un bicho malo malo", [], false, [], enemigoFuerte)
-        var cofreEscondido = new Cofre("Cofre detras de habitacion", 208,  "Ves un lindo cofre", [], false, puertaHs1, true, 60, [escudo])
+        var entrada = new Puerta("Puerta de madera", 0,  "Vas a entrar a la mazmorra", null, false, [primerEnemigo], true, 0) //tiene que ser id = 0
+        var primerEnemigo = new Enemigo("Aventurero Asustado", 1, "El asustadiso hombre te reta", null, false, [habitacionSombria, cofreOculto], enemigoDebil)
+        var cofreOculto = new Cofre("Cofre escondido", 2,  "Encuentras el tesoro del infeliz", [percepcion], true, habitacionSombria, true, 20, [llave])
+        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 3,  "Despues de matar al infeliz estas en una habitacion misteriorsa", [], false, [puertaHs1, puertaHs2])
+        var puertaHs1 = new Puerta("Puerta de acero quebradizo", 4,  "Puerta dañada", [ataqueConEspada], false, enemigoFuerte, false, 6)
+        var puertaHs2 = new Puerta("Puerta de acero reforzado", 5,  "hay una puerta inrompible", [abrirCerraduraPesada], false, cofreEscondido, false, 25)
+        var enemigoFuerte = new Enemigo("Bicho recien despierto", 6,  "Despertaste a un bicho malo malo", [], false, [], enemigoFuerte)
+        var cofreEscondido = new Cofre("Cofre detras de habitacion", 7,  "Ves un lindo cofre", [], false, puertaHs1, true, 60, [escudo])
 
         //Narrativas
         this.narrativa = new Narrativa("Te encuentras al comienzo de la aventura", entrada)
+        this.clases = []
         return this.narrativa
+    }
+
+    getClasesDummy(){
+        //Objs iniciales
+        var espadaSimple = new ObjetoUsable("Espada corta", 11, [ataqueConEspada, defensaConEspada], "Item", "Guerrero")
+        var escudoSimple = new ObjetoUsable("Cuerpo trabajadp", 13, [resistencia], "Poder", "Guerrero")  
+        var observador = new ObjetoUsable("Observador", 15, percepcion, "Poder", "Cualquiera")
+        //Clase
+        var gerrero = new ClaseDePersonaje('Guerrero',[espadaSimple,escudoSimple],3,[observador],1)
     }
 }
