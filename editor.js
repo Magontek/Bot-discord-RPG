@@ -78,9 +78,62 @@ module.exports = class Editor {
     //Crea un efecto nuevo y lo agrega al array de efectos.
 
     //exportacion/importacion direccion = "./ "
-    exportarTodo( unaDireccion ) {
-        let listas = [this.narrativa, this.eventos, this.clases, this.enemigos, this.efectos, this.objetos]
-        listas.forEach(exports)
+
+    exportarNarrativa(){
+        this.narrativa.foreach( elemento => {
+            const eventoJSON = JSON.stringify(elemento)
+            const dir = `./Historias/${narrativa.nombre}`
+            this.exportar(dir,elemento.narrativa.nombre,eventoJSON)
+        })
+    }
+
+    eportarEventos(){
+        this.eventos.foreach( elemento => {
+            const eventoJSON = JSON.stringify(elemento)
+            const dir = `./Historias/${narrativa.nombre}/Eventos/${elemento.tipo}`
+            this.exportar(dir,elemento.evento.nombre,eventoJSON)
+        })
+    }
+    
+    exportarObjetos(){ 
+        this.objetos.foreach( elemento => {
+            const eventoJSON = JSON.stringify(elemento)
+            const dir = `./Historias/${narrativa.nombre}/Objetos/${elemento.nombre}`
+            this.exportar(dir,elemento.objeto.nombre,eventoJSON)
+        })
+    }
+    exportarEfectos(){
+        this.efectos.foreach( elemento => {
+            const eventoJSON = JSON.stringify(elemento)
+            const dir = `./Historias/${narrativa.nombre}/Efectos/${elemento.nombre}`
+            this.exportar(dir,elemento.efecto.nombre,eventoJSON)
+        })
+    }
+    exportarEnemigos(){
+        this.enemigos.foreach( elemento => {
+            const eventoJSON = JSON.stringify(elemento)
+            const dir = `./Historias/${narrativa.nombre}/Enemigos/${elemento.nombre}`
+            this.exportar(dir,elemento.enemigo.nombre,eventoJSON)
+        })
+    }
+
+    exportar(dir,nombre,objetoJSON){
+        if (!fs.existsSync(dir)) { //se fija si existe direcctorio
+            fs.mkdirSync(dir, {  //crea la carpeta del tipo de elemento de manera recursiva (si no existe x crea x) crea la carpeta dentro de la carpeta... 
+                recursive: true
+            });
+        }
+
+        fs.writeFile( `dir/${nombre}.JSON` , objetoJSON ,function(err){ //guarda el archivo
+            if (err) return console.log(err)} )
+    }
+
+    exportarTodo(){
+        this.exportarNarrativa()
+        this.eportarEventos()
+        this.exportarObjetos()
+        this.exportarEfectos()
+        this.exportarEnemigos()
     }
     //Exporta todos los arrays que contienen los elementos de la historia y los guarda en la dirección relativa
     
@@ -103,17 +156,14 @@ module.exports = class Editor {
 
     static makeDummy(){
         //Efectos de la historia //nombre id, si ataca nombre es ataque.
-        var ataqueConEspada = new Efecto ("ataque", 205, 10)
-        var defensaConEspada = new Efecto("defensa", 201, 5)
         var atacarConEscudo = new Efecto("ataque", 201, 7)
         var defensaConEscudo = new Efecto("defensa", 210, 10)
         var ataqueConArmaMala = new Efecto("ataque", 202, 1)
-        var percepcion = new Efecto("Estas atento", 200, 20)
-        var abrirCerraduraPesada = new Efecto("Abriste la cerradura", 240, 1)
-        var locura = new Efecto("Causar locura", 230, 30)
+        var percepcion = new Efecto("detectar", 200, 20)
+        var abrirCerraduraPesada = new Efecto("abrirCerraduras", 240, 1)
+        var locura = new Efecto("ataque", 230, 30)
 
         //Objetos de la historia
-
         //Objs que puede encontrar
         var escudo = new ObjetoUsable("Escudo debil", 12, [atacarConEscudo, defensaConEscudo], "Item", "Guerreo")
         var llave = new ObjetoUsable("Llave", 16, abrirCerraduraPesada, "Item", "Cualquiera")
@@ -137,15 +187,16 @@ module.exports = class Editor {
         var cofreEscondido = new Cofre("Cofre detras de habitacion", 7,  "Ves un lindo cofre", [], false, puertaHs1, true, 60, [escudo])
 
         //Narrativas
-        this.narrativa = new Narrativa("Te encuentras al comienzo de la aventura", entrada)
+        this.narrativa = new Narrativa("Historia de un Gerrero", "Te encuentras al comienzo de la aventura", entrada)
         this.clases = []
         return this.narrativa
     }
 
     static getClasesDummy(){
+        var ataqueConEspada = new Efecto ("ataque", 205, 10)
+        var defensaConEspada = new Efecto("defensa", 201, 5)
         //Objs iniciales
         var espadaSimple = new ObjetoUsable("Espada corta", 11, [ataqueConEspada, defensaConEspada], "Item", "Guerrero")
-        var escudoSimple = new ObjetoUsable("Cuerpo trabajadp", 13, [resistencia], "Poder", "Guerrero")  
         var observador = new ObjetoUsable("Observador", 15, percepcion, "Poder", "Cualquiera")
         //Clase
         var gerrero = new ClaseDePersonaje('Guerrero',[espadaSimple,escudoSimple],3,[observador],1)

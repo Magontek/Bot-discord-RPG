@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Personaje = require('./personaje.js')
-const { Narrativa , Evento } = require('./Eventos.js')
+const Narrativa = require('./Narrativa.js')
 const Editor = require('./Editor.js')
 
 // Esta clase es la que se usa para interactuar con la narrativa. 
