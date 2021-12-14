@@ -1,7 +1,7 @@
 const ObjetoUsable = require ('./ObjetoUsable.js')
 const Efecto = require ('./Efecto.js')
 
-class Personaje {
+module.exports = class Personaje {
     constructor (nombre,experiencia,items,maxItems,poderes,maxPoderes,clase,id){
         this.nombre=nombre;
         this.experiencia=experiencia;

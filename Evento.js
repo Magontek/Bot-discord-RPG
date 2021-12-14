@@ -1,12 +1,13 @@
-module.export = class Evento{
+module.exports = class Evento{
     //________________CONSTRUCTORES____________________
-    constructor(nombre,mienunciado,oculto,consecuencias,id,narrativa){
+    constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias){
         this.nombre=nombre;
-        this.mienunciado=mienunciado;
-        this.oculto=oculto;
-        this.consecuencias=consecuencias;
         this.id=id;
         this.narrativa=narrativa;
+        this.enunciado=enunciado;
+        this.efectoNecesario=efectoNecesario;
+        this.oculto=oculto;
+        this.consecuencias=consecuencias;
     };
     //opciones(personaje) : array(str)toma un personaje y devuelve todas las posibles opciones para ese personaje en ese evento. 
     opciones(){ 

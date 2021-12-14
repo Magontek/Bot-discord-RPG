@@ -1,6 +1,4 @@
-module.export = class ObjetoUsable {}
-
-class ObjetoUsable {
+module.exports = class ObjetoUsable {
     constructor(nombre,id,efectos,tipo,clase){ //efectos=Array de efectos
         this.nombre=nombre;
         this.id=id;

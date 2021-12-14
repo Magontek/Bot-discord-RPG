@@ -101,16 +101,16 @@ module.exports = class Editor {
         return this.narrativa
     }
 
-    makeDummy(){
+    static makeDummy(){
         //Efectos de la historia //nombre id, si ataca nombre es ataque.
-        var ataqueConEspada = new Efecto ("ataque", 5, 10)
-        var defensaConEspada = new Efecto("defensa", 1, 5)
-        var atacarConEscudo = new Efecto("ataque", 1, 7)
-        var defensaConEscudo = new Efecto("defensa", 10, 10)
-        var ataqueConArmaMala = new Efecto("ataque", 2, 1)
-        var percepcion = new Efecto("Estas atento", 0, 20)
-        var abrirCerraduraPesada = new Efecto("Abriste la cerradura", 40, 1)
-        var locura = new Efecto("Causar locura", 30, 30)
+        var ataqueConEspada = new Efecto ("ataque", 205, 10)
+        var defensaConEspada = new Efecto("defensa", 201, 5)
+        var atacarConEscudo = new Efecto("ataque", 201, 7)
+        var defensaConEscudo = new Efecto("defensa", 210, 10)
+        var ataqueConArmaMala = new Efecto("ataque", 202, 1)
+        var percepcion = new Efecto("Estas atento", 200, 20)
+        var abrirCerraduraPesada = new Efecto("Abriste la cerradura", 240, 1)
+        var locura = new Efecto("Causar locura", 230, 30)
 
         //Objetos de la historia
 
@@ -130,7 +130,7 @@ module.exports = class Editor {
         var entrada = new Puerta("Puerta de madera", 0,  "Vas a entrar a la mazmorra", null, false, [primerEnemigo], true, 0) //tiene que ser id = 0
         var primerEnemigo = new Enemigo("Aventurero Asustado", 1, "El asustadiso hombre te reta", null, false, [habitacionSombria, cofreOculto], enemigoDebil)
         var cofreOculto = new Cofre("Cofre escondido", 2,  "Encuentras el tesoro del infeliz", [percepcion], true, habitacionSombria, true, 20, [llave])
-        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 3,  "Despues de matar al infeliz estas en una habitacion misteriorsa", [], false, [puertaHs1, puertaHs2])
+        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 3,  "Despues de matar al infeliz estas en una habitacion misteriosa", [], false, [puertaHs1, puertaHs2])
         var puertaHs1 = new Puerta("Puerta de acero quebradizo", 4,  "Puerta dañada", [ataqueConEspada], false, enemigoFuerte, false, 6)
         var puertaHs2 = new Puerta("Puerta de acero reforzado", 5,  "hay una puerta inrompible", [abrirCerraduraPesada], false, cofreEscondido, false, 25)
         var enemigoFuerte = new Enemigo("Bicho recien despierto", 6,  "Despertaste a un bicho malo malo", [], false, [], enemigoFuerte)
@@ -142,12 +142,13 @@ module.exports = class Editor {
         return this.narrativa
     }
 
-    getClasesDummy(){
+    static getClasesDummy(){
         //Objs iniciales
         var espadaSimple = new ObjetoUsable("Espada corta", 11, [ataqueConEspada, defensaConEspada], "Item", "Guerrero")
         var escudoSimple = new ObjetoUsable("Cuerpo trabajadp", 13, [resistencia], "Poder", "Guerrero")  
         var observador = new ObjetoUsable("Observador", 15, percepcion, "Poder", "Cualquiera")
         //Clase
         var gerrero = new ClaseDePersonaje('Guerrero',[espadaSimple,escudoSimple],3,[observador],1)
+        return [gerrero]
     }
 }

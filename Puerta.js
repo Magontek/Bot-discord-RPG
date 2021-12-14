@@ -1,20 +1,23 @@
 
+const Evento = require('./Evento.js')
 //_______________________Puerta____________________
 
 
-module.export =class Puerta extends Evento
+module.exports =class Puerta extends Evento
 {
-constructor(nombre,mienunciado,oculto,abierto,narrativa,dureza,consecuencias,id,efectoNecesario)
+	/* contructor padre
+	    this.nombre=nombre;
+        this.mienunciado=mienunciado;
+        this.oculto=oculto;
+        this.consecuencias=consecuencias;
+        this.id=id;
+        this.narrativa=narrativa; */
+constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,abierto,dureza)
 {
-	this.nombre=nombre;
-	this.mienunciado=mienunciado;
-	this.oculto=oculto;
-	this.id=id;
+	/*Consecuencias responde en el orden [abrir,abrircon,destruir,destruircon]*/
+	super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
     this.abierto=abierto;//booleano
-    this.dureza=dureza;	//entero
-    this.consecuencias=consecuencias;/*Consecuencias responde en el orden [abrir,abrircon,destruir,destruircon]*/
-	this.efectoNecesario=efectoNecesario; //ejemplo: Llave de oro -->efecto Llave de oro 
-    this.narrativa=narrativa;
+    this.dureza=dureza;	//entero    
 }
 //opciones(personaje) : array(str)toma un personaje y devuelve todas las posibles opciones para ese personaje en ese evento. 
 opciones(personaje) 

@@ -1,4 +1,4 @@
-module.export = class Efecto {}
+module.exports = class Efecto {}
 
 class Efecto { 
     constructor (Nombre,Potencia,CantidadDeUsos){

@@ -1,13 +1,10 @@
-
-module.export = class Enemigo extends Evento
+const Evento = require('./Evento.js')
+module.exports = class Enemigo extends Evento
 { 
-	constructor(nombre,mienunciado,oculto,id,personaje,narrativa)
-	{   this.nombre=nombre;
-		this.mienunciado=mienunciado;
-		this.oculto=oculto;
-		this.id=id;
+	constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,personaje)
+	{   
+		super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
 		this.personaje=personaje;
-        this.narrativa=narrativa;
 	}
 
   // Consecuencias responde en el orden:[muerto, enemigoHuye, personajeHuye, personajeHuyeUsando]

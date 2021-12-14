@@ -1,18 +1,13 @@
-
+const Evento = require('./Evento.js')
 //_____________COFRE______________________
 
-module.export = class Cofre extends Evento                            // ---------------Hereda de Puerta ,no de evento !!
-{ constructor(nombre,mienunciado,oculto,id,abierto,narrativa,dureza,contenido,consecuencias,efectoNecesario)         
-  { this.nombre=nombre;
-	this.mienunciado=mienunciado;
-	this.oculto=oculto;
-	this.id=id;
-	this.abierto=abierto;//bool
-	this.dureza=dureza; // entero
-	this.contenido=contenido; // Objeto
-	this.consecuencias=consecuencias;
-	this.efectoNecesario=efectoNecesario;  // ej : LLaveDePlata--->efecto:LLaveDePlata_001;
-    this.narrativa=narrativa;
+module.exports = class Cofre extends Evento                            // ---------------Hereda de Puerta ,no de evento !!
+{ constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,abierto,dureza,contenido)         
+  { 
+    super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
+    this.abierto=abierto;//booleano
+    this.dureza=dureza;	//entero  
+    this.contenido=contenido; // Objeto
   }
   opciones(personaje)
   {  

@@ -1,18 +1,13 @@
-
+const Evento = require('./Evento.js')
 
 //__________Habitacion______________________
   
-module.export = class Habitacion extends Evento
-{     constructor(nombre,mienunciado,oculto,id,contenido,narrativa,consecuencias,efectoNecesario)
-	{ this.efectoNecesario=efectoNecesario;
-	  this.nombre=nombre;
-	  this.mienunciado=mienunciado;
-	  this.oculto=oculto;
-	  this.id=id;
-	  this.contenido=contenido; // Objeto
-	  this.consecuencias=consecuencias;
-      this.narrativa=narrativa;
-	}	//efectoNecesario=["descubrirOculto"]
+module.exports = class Habitacion extends Evento
+{
+	constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
+	{ 
+		super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
+	}
       
 	opciones() 
 	{ 

@@ -1,19 +1,13 @@
-
+const Evento = require('Evento.js')
 //_____________Biblioteca______________________
 
   
-module.export = class Biblioteca extends Evento
-{    constructor(nombre,mienunciado,oculto,id,abierto,narrativa,contenido,trampa,consecuencias)
+module.exports = class Biblioteca extends Evento
+{    constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,trampa,contenido)
 	{  
-		this.narrativa=narrativa;
-		this.nombre=nombre;
-		this.mienunciado=mienunciado;
-		this.oculto=oculto;
-		this.id=id;
-		this.abierto=abierto;//bool
-		this.contenido=contenido; // Objeto
-		this.consecuencias=consecuencias;
+		super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
 		this.trampa=trampa;//entero
+		this.contenido=contenido; // Objeto
   
 	}
 	//efecto necesario =["Ataque","desactivar Trampa ","detectarTrampas","defensa"]

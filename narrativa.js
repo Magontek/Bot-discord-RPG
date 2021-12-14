@@ -1,5 +1,4 @@
-
-module.export = class Narrativa
+module.exports = class Narrativa
 {
 	constructor(nombre,enunciado,eventoActual)
 	{   this.nombre=nombre;

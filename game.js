@@ -72,21 +72,16 @@ module.exports = class Game{
         return this.clasesDePersonaje(historia).find(element => element.nombre == nombreClase)
     }
 
-    /*
+
+    clasesDePersonaje(historia){
+        return Editor.getClasesDummy()
+        /*
         nombreDeClase : Str
         itemInicial : Arry(Obj(item))
         MaxItems : Int
         poderInicial : Array(Obj(Poder))
         MaxPoderes : Int
-    */
-    clasesDePersonaje(historia){
-        return [{ //maqueta
-                nombre: 'clase',
-                itemInicial: [], 
-                maxItems: 2, 
-                poderInicial: [], 
-                maxPoderes: 2, 
-                }]
+        */
     }
 
     getParcial(userId, guildId){
@@ -122,6 +117,16 @@ module.exports = class Game{
         return (this.getParcial(userId, guildId).nombrePersonaje && 
                 this.getParcial(userId, guildId).clasePersonaje && 
                 this.getParcial(userId, guildId).nombreHistoria);
+    }
+
+    parcial2Personaje(userId, guildId){
+        if(this.parcialCompleto(userId, guildId)){
+            const parcial = this.getParcial(userId, guildId)
+            const personaje = this.crearPersonaje(parcial.nombrePersonaje, parcial.clasePersonaje, parcial.nombreHistoria)
+
+            return personaje
+        }
+        return 
     }
 
     eliminarPartida(userId, guildId){
