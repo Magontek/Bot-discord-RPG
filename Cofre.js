@@ -11,18 +11,18 @@ module.exports = class Cofre extends Evento                            // ------
   }
   opciones(personaje)
   {  
-    this.todasOpciones=["Abrir","Abrir Cofre Con${objeto}","Destruir","Destruir Cofre Con ${objeto}"];
+    var todasOpciones=["Abrir","Abrir Cofre Con${objeto}","Destruir","Destruir Cofre Con ${objeto}"];
 
-    if (personaje.tieneEfecto("abrirCerradura")=!null ||personaje.tieneEfecto(this.efectoNecesario)) this. a=todasOpciones.at(1) //abrirCon =>abrirCerradura
-    else this. a=null
-    if (personaje.tieneEfecto("ataque")!=null) this. b=todasOpciones.at(3) //destruirCon=>ataque
-    else this.b=null
-    this.arrayOpciones.at(0)=opciones.at(0);      // ABRIR
-    this.arrayOpciones.at(1)=a;   			   // ABRIR CON
-    this.arrayOpciones.at(2)=opciones.at(2);	  //DESTRUIR
-    this.arrayOpciones.at(3)=b;				  //DESTRUIR CON
+		var a = ''
+		var b = ''
 
-    this.indiceConsecuencias=0;
+    if (personaje.tieneEfecto("abrirCerradura")=!null || personaje.tieneEfecto(this.efectoNecesario)) a=todasOpciones.at(1) //abrirCon =>abrirCerradura
+    if (personaje.tieneEfecto("ataque")!=null) b=todasOpciones.at(3) //destruirCon=>ataque
+    arrayOpciones.push(todasOpciones.at(0));      // ABRIR
+    arrayOpciones.push(a);   			   // ABRIR CON
+    arrayOpciones.push(todasOpciones.at(2))	  //DESTRUIR
+    arrayOpciones.push(b);				  //DESTRUIR CON
+
     return arrayOpciones 
   
   }

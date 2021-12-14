@@ -2,7 +2,7 @@ const ObjetoUsable = require ('./ObjetoUsable.js')
 const Efecto = require ('./Efecto.js')
 
 module.exports = class Personaje {
-    constructor (nombre,experiencia,items,maxItems,poderes,maxPoderes,clase,id){
+    constructor (nombre,id,experiencia,items,maxItems,poderes,maxPoderes,clase){
         this.nombre=nombre;
         this.experiencia=experiencia;
         this.items=items;
@@ -20,9 +20,13 @@ module.exports = class Personaje {
         this.experiencia + int;
     }
     tieneEfecto(efecto){
-        
-
-        return  this.efectos.filter(i=>i.contieneEfecto(efecto));  
+        return this.itemTieneEfecto(efecto) || this.poderTieneEfecto(efecto)
+    }
+    itemTieneEfecto(efecto){
+        return this.items.some(i=>i.contieneEfecto(efecto)!=null);  
+    }
+    poderTieneEfecto(efecto){
+        return this.poderes.some(i=>i.contieneEfecto(efecto)!=null);  
     }
 
     cantidadDeItems(){
@@ -34,18 +38,18 @@ module.exports = class Personaje {
     }
 
     agregarItem(item){ 
-        if(esPosibleAgregari(item)){
+        if(this.esPosibleAgregari(item)){
             this.items.push(item)
             return true
         }
         return false
     }
     esPosibleAgregari(item){
-        return maxItems > cantidadDeItems()     
+        return maxItems > this.cantidadDeItems()     
     }
      
     agregarPoder(poder){
-        if(esPosibleAgregarp(poder)){
+        if(this.esPosibleAgregarp(poder)){
             this.poderes.push(poder)
         }
     }

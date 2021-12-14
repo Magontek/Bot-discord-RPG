@@ -9,16 +9,12 @@ module.exports = class Habitacion extends Evento
 		super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
 	}
       
-	opciones() 
+	opciones(personaje) 
 	{ 
-       
-return this.consecuencias ;   
-
+		return explorar(personaje).map( consecuencia => `${personaje.nombre} ve un/una ${consecuencia.nombre}` ) ;   
     }
     explorar(personaje) {  
 
-      return this.consecuencias.filter( consecuencia=>( personaje.tieneEfecto(consecuencia.efectoNecesario) &&consecuencia.oculto ) ||!consecuencia.oculto)
-        }
-
-
+      return this.consecuencias.filter( consecuencia => ( personaje.tieneEfecto(consecuencia.efectoNecesario) && consecuencia.oculto ) || !consecuencia.oculto)
+    }
 }

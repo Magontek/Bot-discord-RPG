@@ -22,23 +22,27 @@ constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,a
 //opciones(personaje) : array(str)toma un personaje y devuelve todas las posibles opciones para ese personaje en ese evento. 
 opciones(personaje) 
 {
-    this.todasOpciones=["Abrir","Abrir Puerta Con ${objeto}","Destruir Puerta","Destruir Puerta Con ${objeto}"];
+    var todasOpciones=["Abrir","Abrir Puerta Con ${objeto}","Destruir Puerta","Destruir Puerta Con ${objeto}"];
 
-if (personaje.tieneEfecto("abrirCerradura") ||personaje.tieneEfecto(this.efectoNecesario)) 
-this. a=todasOpciones.at(1);//abrirCon =>abrirCerradura --llave 
-else this.a=null
-if (personaje.tieneEfecto("ataque")!=null ) this.b=todasOpciones.at(3);//destruirCon=>ataque
-else this.b=null
-this.arrayOpciones.at(0)=todasOpciones.at(0);      // ABRIR 
-this.arrayOpciones.at(1)=a;   			      // ABRIRCON 
-this.arrayOpciones.at(2)=todasOpciones.at(2);	  //DESTRUIR
-this.arrayOpciones.at(3)=b;					  //DESTRUIR CON
-  
-	 // Retorna opciones e indice de consecuencias
+    var a = ''
+    var b = ''
 
-this.indiceConsecuencias=0;
-arrayOpciones.forEach(arrayOpcion=>console.log(arrayOpcion));     
-return this.todasOpciones;
+    if (personaje.tieneEfecto("abrirCerradura") || personaje.tieneEfecto(this.efectoNecesario)){
+        a=todasOpciones.at(1);//abrirCon =>abrirCerradura --llave 
+    }
+    if (personaje.tieneEfecto("ataque")!=null ) b=todasOpciones.at(3);//destruirCon=>ataque
+
+    var arrayOpciones = []
+    arrayOpciones.push(todasOpciones.at(0));      // ABRIR 
+    arrayOpciones.push(a);   			      // ABRIRCON 
+    arrayOpciones.push(todasOpciones.at(2));	  //DESTRUIR
+    arrayOpciones.push(b);					  //DESTRUIR CON
+    
+        // Retorna opciones e indice de consecuencias
+
+    this.indiceConsecuencias=0;
+    arrayOpciones.forEach(arrayOpcion=>console.log(arrayOpcion));     
+    return this.todasOpciones;
 
 }
 

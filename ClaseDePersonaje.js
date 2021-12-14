@@ -1,6 +1,6 @@
 module.exports = class ClaseDePersonaje{
-    constructor(nombreDeClase,itemInicial,maxItems,poderInicial,maxPoderes){
-        this.nombreDeClase = nombreDeClase
+    constructor(nombre,itemInicial,maxItems,poderInicial,maxPoderes){
+        this.nombre = nombre
         this.itemInicial = itemInicial
         this.maxItems = maxItems
         this.poderInicial = poderInicial

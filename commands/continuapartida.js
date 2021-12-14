@@ -7,8 +7,7 @@ module.exports = {
 		.setName('continuarpartida')
 		.setDescription('Continuar la partida'),
 	async execute(interaction,game) {
-		const partida = game.partidaDe( interaction.user , interaction.guild_id)
-		//const opciones = partida.narrativa.imprimirOpciones(personaje)
+		const opciones = game.imprimirOpcionesPara(interaction.user , interaction.guild_id)
         const row = new MessageActionRow()
 			.addComponents(
 				new MessageButton()

@@ -8,7 +8,7 @@ module.exports = class ObjetoUsable {
     }
 
     contieneEfecto(efecto){
-        if(this.efecto== efecto){
+        if(this.efecto == efecto){
             return efecto;
         }
         else{

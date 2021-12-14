@@ -43,9 +43,7 @@ module.exports = class Game{
 
     /*Retorna el objeto narrativo que corresponde a ese user y guild.*/
     partidaDe(userId, guildId){
-        const partida = this.partidas.filter(element => element.userId==userId && element.guildId==guildId);
-        const nombre = partida.personaje.nombre
-		console.log(`Partida: ${nombre}`)
+        const partida = this.partidas.find(element => element.userId==userId && element.guildId==guildId);
         return partida
     };
 
@@ -59,13 +57,18 @@ module.exports = class Game{
             console.error(`no existe la clase ${nombreClase}`)
             return null;
         }
-        return new Personaje(nombre, 
+        return new Personaje(nombre, 0, 0,
                             claseDePersonaje.itemInicial, 
                             claseDePersonaje.maxItems, 
                             claseDePersonaje.poderInicial, 
                             claseDePersonaje.maxPoderes, 
-                            claseDePersonaje.nombre
+                            claseDePersonaje.nombre,
                             );
+    }
+
+    imprimirOpcionesPara(userId, guildId){
+        const personaje = this.personajeDe(userId, guildId)
+        return this.partidaDe(userId, guildId).narrativa.imprimirOpciones(personaje)
     }
 
     buscarClase(nombreClase, historia){
@@ -84,6 +87,12 @@ module.exports = class Game{
         */
     }
 
+    listarClasesDePersonaje(userId, guildId){
+        const parcial = this.getParcial(userId, guildId)  
+        if(parcial.nombreHistoria==''){ return "La historia no esta definida, elija una historia" }
+        return this.clasesDePersonaje(parcial.nombreHistoria).map( estaClase => estaClase.nombre );      
+    }
+
     getParcial(userId, guildId){
         let parcial = this.parciales.find(element => element.userID==userId && element.guildID == guildId)
         if (!parcial){
@@ -91,7 +100,7 @@ module.exports = class Game{
                         guildID : guildId, 
                         nombrePersonaje : '', 
                         clasePersonaje : '', 
-                        historia : ''
+                        nombrehistoria : ''
                     });
             this.parciales.push(parcial)
             console.log('Creando nuevo personaje parcial...')
@@ -99,24 +108,22 @@ module.exports = class Game{
         return parcial
     }
 
-    historiaParcial(nombreHistoria){
-        this.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria = nombreHistoria
+    historiaParcial(userId, guildId,nombreHistoria){
+        this.getParcial(userId, guildId).nombreHistoria = nombreHistoria
     }
 
-    claseParcial(clasePersonaje){
-        this.getParcial(interaction.user.id, interaction.guild.id).clasePersonaje = clasePersonaje
+    claseParcial(userId, guildId,clasePersonaje){
+        this.getParcial(userId, guildId).clasePersonaje = clasePersonaje
     }
 
-
-    nombreParcial(nombrePersonaje){
-        this.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje = nombrePersonaje
+    nombreParcial(userId, guildId,nombrePersonaje){
+        this.getParcial(userId, guildId).nombrePersonaje = nombrePersonaje
     }
-
     
     parcialCompleto(userId, guildId){
-        return (this.getParcial(userId, guildId).nombrePersonaje && 
-                this.getParcial(userId, guildId).clasePersonaje && 
-                this.getParcial(userId, guildId).nombreHistoria);
+        return (this.getParcial(userId, guildId).nombrePersonaje!='' && 
+                this.getParcial(userId, guildId).clasePersonaje!='' && 
+                this.getParcial(userId, guildId).nombreHistoria!='');
     }
 
     parcial2Personaje(userId, guildId){
@@ -126,7 +133,7 @@ module.exports = class Game{
 
             return personaje
         }
-        return 
+        return
     }
 
     eliminarPartida(userId, guildId){

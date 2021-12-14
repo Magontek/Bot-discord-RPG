@@ -13,18 +13,18 @@ module.exports = class Biblioteca extends Evento
 	//efecto necesario =["Ataque","desactivar Trampa ","detectarTrampas","defensa"]
 	opciones()
 	{
-        this. todasOpciones=["Buscar","Buscar Con ${objeto}","Tomar Libro Para Adquirir Poder","Tomar Libro Con ${objeto} Para Adquirir Poder"];
+        var todasOpciones=["Buscar","Buscar Con ${objeto}","Tomar Libro Para Adquirir Poder","Tomar Libro Con ${objeto} Para Adquirir Poder"];
 
-		if( personaje.tieneEfecto("ataque") !=null )this. a=todasOpciones.at(1)
-		else this. a=null
-		if( personaje.tieneEfecto("desactivarTrampa")) this. b=todasOpciones.at(3)
-		else this. b=null
-		this.arrayOpciones.at(0)=todasOpciones.at(0);      // ABRIR
-		this.arrayOpciones.at(1)=a;   			      // ABRIR CON
-		this.arrayOpciones.at(2)=todasOpciones.at(2);	  //DESTRUIR
-		this.arrayOpciones.at(3)=b;					  //DESTRUIR CON
+		var a = ''
+		var b = ''
+
+		if( personaje.tieneEfecto("ataque") !=null ) a=todasOpciones.at(1)
+		if( personaje.tieneEfecto("desactivarTrampa")) b=todasOpciones.at(3)
+		arrayOpciones.push(todasOpciones.at(0));      // ABRIR
+		arrayOpciones.push(a);   			      // ABRIR CON
+		arrayOpciones.push(todasOpciones.at(2));	  //DESTRUIR
+		arrayOpciones.push(b);					  //DESTRUIR CON
 		
-		this.indiceConsecuencias=0;
 		return arrayOpciones ;
 	}
    

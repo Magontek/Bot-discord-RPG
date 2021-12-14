@@ -156,6 +156,7 @@ module.exports = class Editor {
 
     static makeDummy(){
         //Efectos de la historia //nombre id, si ataca nombre es ataque.
+        var ataqueConEspada = new Efecto ("ataque", 205, 10)
         var atacarConEscudo = new Efecto("ataque", 201, 7)
         var defensaConEscudo = new Efecto("defensa", 210, 10)
         var ataqueConArmaMala = new Efecto("ataque", 202, 1)
@@ -169,6 +170,7 @@ module.exports = class Editor {
         var llave = new ObjetoUsable("Llave", 16, abrirCerraduraPesada, "Item", "Cualquiera")
 
         //Obj de enemigos
+
         var espadaRota = new ObjetoUsable("Espada Rota", 14, ataqueConArmaMala, "Item", "EnemigoDebil")
         var menteDeDios = new ObjetoUsable("Mente Divina", 17, locura, "Poder", "EnemigoFuerte")
 
@@ -193,13 +195,14 @@ module.exports = class Editor {
     }
 
     static getClasesDummy(){
+        var percepcion = new Efecto("detectar", 200, 20)
         var ataqueConEspada = new Efecto ("ataque", 205, 10)
         var defensaConEspada = new Efecto("defensa", 201, 5)
         //Objs iniciales
         var espadaSimple = new ObjetoUsable("Espada corta", 11, [ataqueConEspada, defensaConEspada], "Item", "Guerrero")
         var observador = new ObjetoUsable("Observador", 15, percepcion, "Poder", "Cualquiera")
         //Clase
-        var gerrero = new ClaseDePersonaje('Guerrero',[espadaSimple,escudoSimple],3,[observador],1)
+        var gerrero = new ClaseDePersonaje('Guerrero',[espadaSimple],3,[observador],1)
         return [gerrero]
     }
 }

@@ -19,6 +19,6 @@ module.exports = class Evento{
     {
         if( numero<opciones.length )  console.error('Opcion invalida') ;  // sin item 
         this.narrativa.pasarAEvento(evento)
-        return this.consecuencias.at(opciones(numero));
+        return this.consecuencias.at(this.opciones(numero));
     }
 }
