@@ -11,7 +11,7 @@ module.exports = class Habitacion extends Evento
       
 	opciones(personaje) 
 	{ 
-		return this.explorar(personaje).map( consecuencia => `${personaje.nombre} ve un/una ${consecuencia.nombre}` ) ; 
+		return this.explorar(personaje).map( consecuencia => `Ves un/una ${consecuencia.nombre}` ) ; 
     }
     explorar(personaje) {  
 

@@ -6,7 +6,9 @@ module.exports = {
 		.setName('personaje')
 		.setDescription('Beep!'),
 	async execute(interaction,game) {
-		const embedPersonaje = DicordGameHelper.embedPersonaje(game.personajeDe(interaction.user,interaction.guild_id));
-		return interaction.reply({ embeds: [embedPersonaje] });
+		const personaje = game.personajeDe(interaction.user,interaction.guild_id)
+		if (!personaje) return interaction.reply({ content: 'Todavia no creaste un personaje' , ephemeral: true });
+		const embedPersonaje = DicordGameHelper.embedPersonaje();
+		return interaction.reply({ embeds: [embedPersonaje] , ephemeral: true });
 	},
 };

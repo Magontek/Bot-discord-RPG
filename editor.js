@@ -185,13 +185,14 @@ module.exports = class Editor {
         //Eventos. nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias
         var cofreEscondido = new Cofre("Cofre detras de habitacion", 7, narrativa1, "Ves un lindo cofre", [], false, [puertaHs1], true, 60, [escudo])
         var enemigoFuerte = new Enemigo("Bicho recien despierto", 6, narrativa1, "Despertaste a un bicho malo malo", [], false, [], [enemigoFuerte])
-        var puertaHs2 = new Puerta("Puerta de acero reforzado", 5, narrativa1, "hay una puerta inrompible", [abrirCerraduraPesada], false, [cofreEscondido], false, 25)
-        var puertaHs1 = new Puerta("Puerta de acero quebradizo", 4, narrativa1, "Puerta dañada", [ataqueConEspada], false, [enemigoFuerte], false, 6)
-        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 3, narrativa1, "Despues de matar al infeliz estas en una habitacion misteriosa", [], false, [puertaHs1, puertaHs2])
+        var puertaHs2 = new Puerta("Puerta de acero reforzado", 5, narrativa1, "Vez una puerta inrompible", [abrirCerraduraPesada], false, [cofreEscondido,cofreEscondido,cofreEscondido,cofreEscondido], false, 25)
+        var puertaHs1 = new Puerta("Puerta de acero quebradizo", 4, narrativa1, "Ves una puerta de acero quebradizo", [ataqueConEspada], false, [enemigoFuerte,enemigoFuerte,enemigoFuerte,enemigoFuerte], false, 6)
+        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 3, narrativa1, "Despues de matar al infeliz miras al rededor y descubris que te encontras en una habitacion misteriosa", [], false, [puertaHs1, puertaHs2])
         var cofreOculto = new Cofre("Cofre escondido", 2, narrativa1, "Encuentras el tesoro del infeliz", [percepcion], true, [habitacionSombria], true, 20, [llave])
         var primerEnemigo = new Enemigo("Aventurero Asustado", 1, narrativa1, "El asustadiso hombre te reta", [], false, [habitacionSombria, cofreOculto], enemigoDebil)
         var entrada = new Puerta("Puerta de madera", 0, narrativa1, "Vas a entrar a la mazmorra", [], false, [primerEnemigo,primerEnemigo,primerEnemigo,primerEnemigo], true, 0) //tiene que ser id = 0
 
+        cofreEscondido.consecuencias = [puertaHs1]
         narrativa1.eventoActual = entrada
 
         this.narrativa = narrativa1

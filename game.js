@@ -48,11 +48,15 @@ module.exports = class Game{
     };
 
     narrativaDe(userId, guildId){
-        return this.partidaDe(userId, guildId).narrativa
+        const partida = this.partidaDe(userId, guildId)
+        if(partida) return partida.narrativa
+        return
     }
 
     personajeDe(userId, guildId){
-        return this.partidaDe(userId, guildId).personaje
+        const partida = this.partidaDe(userId, guildId)
+        if(partida) return partida.personaje
+        return
     }
 
     crearPersonaje(nombre, nombreClase, historia){
