@@ -15,9 +15,13 @@ module.exports = class Cofre extends Evento                            // ------
 
 		var a = ''
 		var b = ''
+    
 
-    if (personaje.tieneEfecto("abrirCerradura")=!null || personaje.tieneEfecto(this.efectoNecesario)) a=todasOpciones.at(1) //abrirCon =>abrirCerradura
+    if (personaje.tieneEfecto("abrirCerradura")!=null || personaje.tieneEfecto(this.efectoNecesario)) a=todasOpciones.at(1) //abrirCon =>abrirCerradura
     if (personaje.tieneEfecto("ataque")!=null) b=todasOpciones.at(3) //destruirCon=>ataque
+
+    var arrayOpciones = []
+    
     arrayOpciones.push(todasOpciones.at(0));      // ABRIR
     arrayOpciones.push(a);   			   // ABRIR CON
     arrayOpciones.push(todasOpciones.at(2))	  //DESTRUIR

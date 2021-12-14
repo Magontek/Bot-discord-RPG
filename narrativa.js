@@ -20,6 +20,6 @@ module.exports = class Narrativa
     }
 
 	pasarAEvento(evento){
-		this.narrativa.eventoActual = evento
+		this.eventoActual = evento
 	}
 }
