@@ -1,7 +1,7 @@
 const fs = require('fs');
-const Narrativa = require('./narrativa.js')
 const Personaje = require('./personaje.js')
-const Evento = require('./evento.js')
+const { Narrativa , Evento } = require('./Eventos.js')
+const Editor = require('./Editor.js')
 
 // Esta clase es la que se usa para interactuar con la narrativa. 
 module.exports = class Game{
@@ -16,13 +16,16 @@ module.exports = class Game{
     y guild que devuelve discord.js y el personaje.
     Solo puede haber una partida para cada par user guild.*/
     crearPartida(guildId,userId,nombreHistoria,personaje){
-        const narrativa = this.cargarHistoria(nombreHistoria)
+        const narrativa = Editor.makeDummy()
+        if(!narrativa) return false;
         this.partidas.push({guildId: guildId, 
                             userId: userId, 
                             narrativa: narrativa, 
                             personaje: personaje
                             })
+        return true
     };
+
     /*Lista todos los nombres de las carpetas dentro de la carpeta historias. 
     Y toma la descripcion del archivos narrativa.JSON*/
     listarHistorias(){
@@ -43,7 +46,7 @@ module.exports = class Game{
         const partida = this.partidas.filter(element => element.userId==userId && element.guildId==guildId);
         const nombre = partida.personaje.nombre
 		console.log(`Partida: ${nombre}`)
-        return 
+        return partida
     };
 
     personajeDe(userId, guildId){
@@ -52,7 +55,10 @@ module.exports = class Game{
 
     crearPersonaje(nombre, nombreClase, historia){
         const claseDePersonaje = this.buscarClase(nombreClase, historia)
-        if (!claseDePersonaje) return console.error(`no existe la clase ${nombreClase}`);
+        if (!claseDePersonaje){
+            console.error(`no existe la clase ${nombreClase}`)
+            return null;
+        }
         return new Personaje(nombre, 
                             claseDePersonaje.itemInicial, 
                             claseDePersonaje.maxItems, 
@@ -90,13 +96,28 @@ module.exports = class Game{
                         guildID : guildId, 
                         nombrePersonaje : '', 
                         clasePersonaje : '', 
-                        nombreHistoria : ''});
+                        historia : ''
+                    });
             this.parciales.push(parcial)
             console.log('Creando nuevo personaje parcial...')
         }
         return parcial
     }
 
+    historiaParcial(nombreHistoria){
+        this.getParcial(interaction.user.id, interaction.guild.id).nombreHistoria = nombreHistoria
+    }
+
+    claseParcial(clasePersonaje){
+        this.getParcial(interaction.user.id, interaction.guild.id).clasePersonaje = clasePersonaje
+    }
+
+
+    nombreParcial(nombrePersonaje){
+        this.getParcial(interaction.user.id, interaction.guild.id).nombrePersonaje = nombrePersonaje
+    }
+
+    
     parcialCompleto(userId, guildId){
         return (this.getParcial(userId, guildId).nombrePersonaje && 
                 this.getParcial(userId, guildId).clasePersonaje && 
@@ -108,7 +129,7 @@ module.exports = class Game{
         this.eliminarPartidaIndice(index)
     }
 
-    eliminarPartidaIndice(indice){
+    eliminarPartidaIndice(index){
         if (index > -1) {
             array.splice(index, 1);
         }

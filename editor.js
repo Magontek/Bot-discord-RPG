@@ -8,7 +8,7 @@ const Enemigo = require ('./clasesRPG.js');
 const Habitacion  = require ('./clasesRPG.js');
 const Narrativa = require ('./clasesRPG.js');
 
-class editor {
+module.exports = class Editor {
     constructor (narrativa, eventos, clases, enemigos, efectos, objetos) {
         this.narrativa = null
         this.eventos = []      //array
@@ -83,12 +83,65 @@ class editor {
     }
     //Exporta todos los arrays que contienen los elementos de la historia y los guarda en la dirección relativa
     
-    importarTodo(direccion, nombreDeHistoria) {}
+    importarTodo(direccion, nombreDeHistoria) {
+
+    }
     //Carga todos los archivos de la dirección relativa que estén dentro de la historia con ese nombreDeHistoria en las propiedades del editor.
     
+    importarClases(){
+        return null
+    }
+
+    importarNombresDeHistorias(){
+        return null
+    }
     
     getNarrativa() {
         return this.narrativa
     }
-    //Retorna el objeto this.narrativa
+
+    makeDummy(){
+        //Efectos de la historia //nombre id, si ataca nombre es ataque.
+        var ataqueConEspada = new Efecto ("ataque", 5, 10)
+        var defensaConEspada = new Efecto("Defenderse con espada", 1, 5)
+        var atacarConEscudo = new Efecto("Atacar con el Escudo", 1, 7)
+        var defensaConEscudo = new Efecto("Defenderse con Escudo", 10, 10)
+        var resistencia = new Efecto("Usar Resistencia Corporal", 3, 100)
+        var ataqueConArmaMala = new Efecto("Ataque debil", 2, 1)
+        var percepcion = new Efecto("Estas atento", 0, 20)
+        var abrirCerraduraPesada = new Efecto("Abriste la cerradura", 0, 1)
+        var locura = new Efecto("Causar locura", 30, 30)
+
+        //Objetos de la historia
+        //Objs iniciales
+        var espadaSimple = new ObjetoUsable("Espada corta", 11, [ataqueConEspada, defensaConEspada], "Item", "Guerrero")
+        var escudoSimple = new ObjetoUsable("Cuerpo trabajadp", 13, [resistencia], "Poder", "Guerrero")  
+        var observador = new ObjetoUsable("Observador", 15, percepcion, "Poder", "Cualquiera")
+
+        //Objs que puede encontrar
+        var escudo = new ObjetoUsable("Escudo debil", 12, [atacarConEscudo, defensaConEscudo], "Item", "Guerreo")
+        var llave = new ObjetoUsable("Llave", 16, abrirCerraduraPesada, "Item", "Cualquiera")
+
+        //Obj de enemigos
+        var espadaRota = new ObjetoUsable("Espada Rota", 14, ataqueConArmaMala, "Item", "EnemigoDebil")
+        var menteDeDios = new ObjetoUsable("Mente Divina", 17, locura, "Poder", "EnemigoFuerte")
+
+        //Personaje
+        var enemigoDebil = new Personaje("Miedoso", 102, 1, [espadaRota], 1, [], 0, "Enemigo")
+        var enemigoFuerte = new Personaje("Cthulhu", 103, 50, [], 0, [menteDeDios], 1, "Enemigo" )
+
+        //Eventos. (Leer la descripcion)
+        var entrada = new Puerta("Puerta de madera", 201,  "Vas a entrar a la mazmorra", null, false, [primerEnemigo], true, 0) //tiene que ser id = 0
+        var primerEnemigo = new Enemigo("Aventurero Asustado", 202, "El asustadiso hombre te reta", null, false, [habitacionSombria, cofreOculto], enemigoDebil)
+        var cofreOculto = new Cofre("Cofre escondido", 203,  "Encuentras el tesoro del infeliz", [percepcion], true, habitacionSombria, true, 20, [llave])
+        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 203,  "Despues de matar al infeliz estas en una habitacion misteriorsa", [], false, [puertaHs1, puertaHs2])
+        var puertaHs1 = new Puerta("Puerta de acero quebradizo", 205,  "Puerta dañada", [ataqueConEspada], false, enemigoFuerte, false, 6)
+        var puertaHs2 = new Puerta("Puerta de acero reforzado", 206,  "hay una puerta inrompible", [abrirCerraduraPesada], false, cofreEscondido, false, 25)
+        var enemigoFuerte = new Enemigo("Bicho recien despierto", 207,  "Despertaste a un bicho malo malo", [], false, [], enemigoFuerte)
+        var cofreEscondido = new Cofre("Cofre detras de habitacion", 208,  "Ves un lindo cofre", [], false, puertaHs1, true, 60, [escudo])
+
+        //Narrativas
+        this.narrativa = new Narrativa("Te encuentras al comienzo de la aventura", entrada)
+        return this.narrativa
+    }
 }
