@@ -15,10 +15,10 @@ module.exports = class Evento{
 
     }
     //Este método seleccionaOpcion() toma un entero y devuelve el evento asignado a ese entero en el array Consecuencias.
-    seleccionaOpcion(numero) // Para todos
+    seleccionarOpcion(numero,personaje) // Para todos
     {
-        if( numero<opciones.length )  console.error('Opcion invalida') ;  // sin item 
-        this.narrativa.pasarAEvento(evento)
-        return this.consecuencias.at(this.opciones(numero));
+        if( numero>this.opciones(personaje).length )  console.error('Opcion invalida') ;  // sin item 
+        this.narrativa.pasarAEvento(this.consecuencias.at(numero))
+        return `Elegiste: ${this.nombre}`
     }
 }

@@ -2,6 +2,7 @@ const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 const Game = require('./game.js')
+const DicordGameHelper = require('./helpers/discordGameHelper.js')
 
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
@@ -24,9 +25,20 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.isButton()){
 		if(interaction.customId=='eliminarpartida'){
 			game.eliminarPartida( interaction.user, interaction.guild_id )
+			return interaction.reply({content: `Partida eliminada`, ephemeral: true});
 		}
-		return interaction.reply({content: `Apretaste el boton ${interaction.customId}`, ephemeral: true});
+		const entero = parseInt(interaction.customId,10)
+		if(Number.isInteger(entero)){
+			console.log(`Eligio opcion ${entero}`)
+			game.seleccionarOpcionPara(entero, interaction.user, interaction.guild_id)
+			const opciones = game.imprimirOpcionesPara(interaction.user , interaction.guild_id)
+			console.log(`Opciones: ${opciones}`)
+			const enunciado = game.imprimirEnunciado(interaction.user , interaction.guild_id)
+			const row = DicordGameHelper.embedEnunciado(opciones)
+			await interaction.update({content: `Descripcion: ${enunciado}`, ephemeral: true, components: [row]})
+		}
 	};
+	console.log(`Recibio interaccion: ${interaction.customId}`)
 	
 	if (!interaction.isCommand()) return;
 

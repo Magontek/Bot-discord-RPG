@@ -155,6 +155,8 @@ module.exports = class Editor {
     }
 
     static makeDummy(){
+        
+
         //Efectos de la historia //nombre id, si ataca nombre es ataque.
         var ataqueConEspada = new Efecto ("ataque", 205, 10)
         var atacarConEscudo = new Efecto("ataque", 201, 7)
@@ -177,20 +179,24 @@ module.exports = class Editor {
         var enemigoDebil = new Personaje("Miedoso", 102, 1, [espadaRota], 1, [], 0, "Enemigo")
         var enemigoFuerte = new Personaje("Cthulhu", 103, 50, [], 0, [menteDeDios], 1, "Enemigo" )
 
-        //Eventos. nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias
-        var entrada = new Puerta("Puerta de madera", 0, this.narrativa, "Vas a entrar a la mazmorra", [], false, [primerEnemigo], true, 0) //tiene que ser id = 0
-        var primerEnemigo = new Enemigo("Aventurero Asustado", 1, this.narrativa, "El asustadiso hombre te reta", [], false, [habitacionSombria, cofreOculto], enemigoDebil)
-        var cofreOculto = new Cofre("Cofre escondido", 2, this.narrativa, "Encuentras el tesoro del infeliz", [percepcion], true, habitacionSombria, true, 20, [llave])
-        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 3, this.narrativa, "Despues de matar al infeliz estas en una habitacion misteriosa", [], false, [puertaHs1, puertaHs2])
-        var puertaHs1 = new Puerta("Puerta de acero quebradizo", 4, this.narrativa, "Puerta dañada", [ataqueConEspada], false, [enemigoFuerte], false, 6)
-        var puertaHs2 = new Puerta("Puerta de acero reforzado", 5, this.narrativa, "hay una puerta inrompible", [abrirCerraduraPesada], false, [cofreEscondido], false, 25)
-        var enemigoFuerte = new Enemigo("Bicho recien despierto", 6, this.narrativa, "Despertaste a un bicho malo malo", [], false, [], [enemigoFuerte])
-        var cofreEscondido = new Cofre("Cofre detras de habitacion", 7, this.narrativa, "Ves un lindo cofre", [], false, [puertaHs1], true, 60, [escudo])
-
         //Narrativas
-        this.narrativa = new Narrativa("Historia de un Gerrero", "Te encuentras al comienzo de la aventura", entrada)
+        var narrativa1 = new Narrativa("Historia de un Gerrero", "Te encuentras al comienzo de la aventura", null)
+
+        //Eventos. nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias
+        var entrada = new Puerta("Puerta de madera", 0, narrativa1, "Vas a entrar a la mazmorra", [], false, [primerEnemigo], true, 0) //tiene que ser id = 0
+        var primerEnemigo = new Enemigo("Aventurero Asustado", 1, narrativa1, "El asustadiso hombre te reta", [], false, [habitacionSombria, cofreOculto], enemigoDebil)
+        var cofreOculto = new Cofre("Cofre escondido", 2, narrativa1, "Encuentras el tesoro del infeliz", [percepcion], true, habitacionSombria, true, 20, [llave])
+        var habitacionSombria = new Habitacion("Habitacion de dos puertas", 3, narrativa1, "Despues de matar al infeliz estas en una habitacion misteriosa", [], false, [puertaHs1, puertaHs2])
+        var puertaHs1 = new Puerta("Puerta de acero quebradizo", 4, narrativa1, "Puerta dañada", [ataqueConEspada], false, [enemigoFuerte], false, 6)
+        var puertaHs2 = new Puerta("Puerta de acero reforzado", 5, narrativa1, "hay una puerta inrompible", [abrirCerraduraPesada], false, [cofreEscondido], false, 25)
+        var enemigoFuerte = new Enemigo("Bicho recien despierto", 6, narrativa1, "Despertaste a un bicho malo malo", [], false, [], [enemigoFuerte])
+        var cofreEscondido = new Cofre("Cofre detras de habitacion", 7, narrativa1, "Ves un lindo cofre", [], false, [puertaHs1], true, 60, [escudo])
+
+        narrativa1.eventoActual = entrada
+
+        this.narrativa = narrativa1
         this.clases = []
-        return this.narrativa
+        return narrativa1
     }
 
     static getClasesDummy(){

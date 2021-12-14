@@ -165,6 +165,10 @@ module.exports = class Game{
     existePartidaDe(userId, guildId){
         return this.indiceDePartidaDe(userId, guildId)>=0
     }
+
+    seleccionarOpcionPara(entero, userId, guildId){
+        this.narrativaDe(userId, guildId).seleccionarOpcion(entero,this.personajeDe(userId, guildId))
+    }
 };
 
 //const game = new Game()

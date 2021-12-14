@@ -6,8 +6,8 @@ module.exports = class Narrativa
 		this.eventoActual=eventoActual;
 	}
     	//SelecionarOpcion(int) : str Llama a eventoActual.SelecionarOpcion(int) y retorna el resultado.
-	seleccionarOpcion(entero){
-		return this.eventoActual.seleccionarOpcion(entero)
+	seleccionarOpcion(entero,personaje){
+		return this.eventoActual.seleccionarOpcion(entero,personaje)
 	}
 
     	//describirEvento() : str Retorna eventoActual.enunciado

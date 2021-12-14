@@ -1,5 +1,5 @@
 const Personaje = require('../personaje.js')
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed , MessageActionRow , MessageButton } = require("discord.js");
 
 module.exports = class discordGameHelper{
     static embedPersonaje(personaje){
@@ -11,7 +11,7 @@ module.exports = class discordGameHelper{
                     .addField('Clase:', personaje.clase, true)
                     .addFields(
                         { name: 'Items', value: 'Efectos' },
-                        { name: '\u200B', value: '\u200B' }
+                        { name: '\u200B', value: '\u200B' },
                     )
 /*
         personaje.items.forEach(element => {
@@ -20,5 +20,22 @@ module.exports = class discordGameHelper{
             }
         })*/
         return embed
+    }
+
+    static embedEnunciado(opciones){
+        const row = new MessageActionRow()
+		var index = 0
+		opciones.forEach(element => {
+			if(element!=''){
+				row.addComponents(
+					new MessageButton()
+						.setCustomId(index.toString())
+						.setLabel(element)
+						.setStyle("PRIMARY"),
+				)
+			}
+			index += 1
+		});
+        return row
     }
 }
