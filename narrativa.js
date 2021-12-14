@@ -15,6 +15,7 @@ module.exports = class Narrativa
 
 	//ImprimirOpciones(personaje) : array(str) Llama a eventoActual.opciones(personaje) y retorna el resultado
 	imprimirOpciones(personaje){
+		console.log(`Opciones de evento: ${this.eventoActual.opciones(personaje)}`)
         return this.eventoActual.opciones(personaje)
     }
 

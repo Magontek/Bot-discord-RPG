@@ -40,9 +40,9 @@ opciones(personaje)
     
         // Retorna opciones e indice de consecuencias
 
-    this.indiceConsecuencias=0;
-    arrayOpciones.forEach(arrayOpcion=>console.log(arrayOpcion));     
-    return this.todasOpciones;
+    arrayOpciones.forEach(arrayOpcion=>console.log(arrayOpcion)); 
+
+    return arrayOpciones
 
 }
 

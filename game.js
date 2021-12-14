@@ -47,6 +47,10 @@ module.exports = class Game{
         return partida
     };
 
+    narrativaDe(userId, guildId){
+        return this.partidaDe(userId, guildId).narrativa
+    }
+
     personajeDe(userId, guildId){
         return this.partidaDe(userId, guildId).personaje
     }
@@ -67,8 +71,15 @@ module.exports = class Game{
     }
 
     imprimirOpcionesPara(userId, guildId){
+        const narrativa = this.narrativaDe(userId, guildId)
         const personaje = this.personajeDe(userId, guildId)
-        return this.partidaDe(userId, guildId).narrativa.imprimirOpciones(personaje)
+        console.log(`Imprimiendo opciones de narrativa: ${narrativa.nombre} en evento ${narrativa.eventoActual.nombre}`)
+        return narrativa.imprimirOpciones(personaje)
+    }
+
+    imprimirEnunciado(userId, guildId){
+        const narrativa = this.narrativaDe(userId, guildId)
+        return narrativa.describirEvento()
     }
 
     buscarClase(nombreClase, historia){
@@ -149,6 +160,10 @@ module.exports = class Game{
 
     indiceDePartidaDe(userId, guildId){
         return this.partidas.findIndex(element => element.userId==userId && element.guildId==guildId)
+    }
+
+    existePartidaDe(userId, guildId){
+        return this.indiceDePartidaDe(userId, guildId)>=0
     }
 };
 

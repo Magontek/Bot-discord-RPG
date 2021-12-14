@@ -9,6 +9,6 @@ module.exports = {
         
 		const respuesta = game.listarClasesDePersonaje(interaction.user.id, interaction.guild.id).toString()
         console.log(`Clases de personaje: ${respuesta}`)
-		return interaction.reply({ content: respuesta });
+		return interaction.reply({ content: respuesta , ephemeral: true});
 	},
 };

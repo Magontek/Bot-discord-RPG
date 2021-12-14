@@ -26,7 +26,6 @@ module.exports = class Enemigo extends Evento
 		arrayOpciones.push(todasOpciones.at(2))	   	// huir
 		arrayOpciones.push(b)					   	// huir con
 
-
 		return arrayOpciones ;
 	}
 
