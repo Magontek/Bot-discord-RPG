@@ -5,14 +5,7 @@ const Evento = require('./Evento.js')
 
 module.exports =class Puerta extends Evento
 {
-	/* contructor padre
-	    this.nombre=nombre;
-        this.mienunciado=mienunciado;
-        this.oculto=oculto;
-        this.consecuencias=consecuencias;
-        this.id=id;
-        this.narrativa=narrativa; */
-constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,abierto,dureza)
+    constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,abierto,dureza)
 {
 	/*Consecuencias responde en el orden [abrir,abrircon,destruir,destruircon]*/
 	super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
@@ -40,7 +33,7 @@ opciones(personaje)
     
         // Retorna opciones e indice de consecuencias
 
-    arrayOpciones.forEach(arrayOpcion=>console.log(arrayOpcion)); 
+    //arrayOpciones.forEach(arrayOpcion=>console.log(arrayOpcion)); 
 
     return arrayOpciones
 

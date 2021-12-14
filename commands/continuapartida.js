@@ -9,35 +9,23 @@ module.exports = {
 	async execute(interaction,game) {
 		if(!game.existePartidaDe(interaction.user , interaction.guild_id)){
 			return interaction.reply({ content: 'No existe la partida' , ephemeral: true});
-		} 
+		}
 		const opciones = game.imprimirOpcionesPara(interaction.user , interaction.guild_id)
 		console.log(`Opciones: ${opciones}`)
 		const enunciado = game.imprimirEnunciado(interaction.user , interaction.guild_id)
         const row = new MessageActionRow()
+		var index = 0
 		opciones.forEach(element => {
-			row.addComponents(
-				new MessageButton()
-					.setCustomId("1")
-					.setLabel(element)
-					.setStyle("PRIMARY"),
-			)
+			if(element!=''){
+				row.addComponents(
+					new MessageButton()
+						.setCustomId(index.toString())
+						.setLabel(element)
+						.setStyle("PRIMARY"),
+				)
+			}
+			index += 1
 		});
-			/*.addComponents(
-				new MessageButton()
-					.setCustomId("1")
-					.setLabel("A")
-					.setStyle("PRIMARY"),
-
-				new MessageButton()
-					.setCustomId("opt-B")
-					.setLabel("B")
-					.setStyle("PRIMARY"),
-						
-				new MessageButton()
-					.setCustomId("opt-C")
-					.setLabel("C")
-					.setStyle("PRIMARY"),
-			);*/
-        return interaction.reply({content: enunciado, ephemeral: true, components: [row]})
+        return interaction.reply({content: `Descripcion: ${enunciado}`, ephemeral: true, components: [row]})
 	},
 };
