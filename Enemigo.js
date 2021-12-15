@@ -16,8 +16,13 @@ module.exports = class Enemigo extends Evento
 		var a = ''
 		var b = ''
 
-		if (personaje.tieneEfecto("ataque")!=null ) a=todasOpciones.at(1);    //atacarCon => ataque
-		if ( (personaje.tieneEfecto("sigilo")) || (personaje.tieneEfecto("velocidad" ) ) )  b=todasOpciones.at(3) //huirCon ==> sigilo o velocidad
+		if (personaje.tieneEfecto("ataque").length>0 ) a=todasOpciones.at(1) + personaje.tieneEfecto("ataque").at(0) ;    //atacarCon => ataque
+		if (personaje.tieneEfecto("sigilo").length>0){
+			a=todasOpciones.at(3) + personaje.tieneEfecto("sigilo").at(0);
+		}
+		if (personaje.tieneEfecto(this.efectoNecesario).length>0){
+			a=todasOpciones.at(3) + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
+		}
 
 		var arrayOpciones = []
 

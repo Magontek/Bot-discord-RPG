@@ -15,15 +15,18 @@ module.exports =class Puerta extends Evento
 //opciones(personaje) : array(str)toma un personaje y devuelve todas las posibles opciones para ese personaje en ese evento. 
 opciones(personaje) 
 {
-    var todasOpciones=["Abrir","Abrir Puerta Con ${objeto}","Destruir Puerta","Destruir Puerta Con ${objeto}"];
+    var todasOpciones=["Abrir","Abrir Puerta Con","Destruir Puerta","Destruir Puerta Con"];
 
     var a = ''
     var b = ''
 
-    if (personaje.tieneEfecto("abrirCerradura") || personaje.tieneEfecto(this.efectoNecesario)){
-        a=todasOpciones.at(1);//abrirCon =>abrirCerradura --llave 
+    if (personaje.tieneEfecto("abrirCerradura").length>0){
+        a=todasOpciones.at(1) + personaje.tieneEfecto("abrirCerradura").at(0);
     }
-    if (personaje.tieneEfecto("ataque")!=null ) b=todasOpciones.at(3);//destruirCon=>ataque
+    if (personaje.tieneEfecto(this.efectoNecesario).length>0){
+        a=todasOpciones.at(1) + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
+    }
+    if (personaje.tieneEfecto("ataque")!=[] ) b=todasOpciones.at(3) + personaje.tieneEfecto("ataque").at(0);//destruirCon=>ataque
 
     var arrayOpciones = []
     arrayOpciones.push(todasOpciones.at(0));      // ABRIR 
