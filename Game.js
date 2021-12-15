@@ -170,7 +170,7 @@ module.exports = class Game{
     }
 
     seleccionarOpcionPara(entero, userId, guildId){
-        this.narrativaDe(userId, guildId).seleccionarOpcion(entero,this.personajeDe(userId, guildId))
+        return this.narrativaDe(userId, guildId).seleccionarOpcion(entero,this.personajeDe(userId, guildId))
     }
 };
 

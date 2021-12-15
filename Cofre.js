@@ -10,6 +10,17 @@ module.exports = class Cofre extends Evento                            // ------
     this.dureza=dureza;	//entero  
     this.contenido=contenido; // Objeto
   }
+  seleccionarOpcion(numero,personaje){
+
+    if (this.contenido){
+      if (personaje.agregarItem(this.contenido.at(0))){
+        return super.seleccionarOpcion(numero,personaje) + `: Agarraste el item ${this.contenido.at(0).nombre}`
+      }
+      return super.seleccionarOpcion(numero,personaje) + `: No agarraste el item porque queda mas espacio`
+    }
+    return super.seleccionarOpcion(numero,personaje) + `: El cofre estaba vacio`
+  }
+
   opciones(personaje)
   {  
     var todasOpciones=["Abrir","Abrir Cofre con ","Destruir","Destruir Cofre Con "];
@@ -18,10 +29,10 @@ module.exports = class Cofre extends Evento                            // ------
 		var b = ''
     
     if (personaje.tieneEfecto("abrirCerradura").length>0){
-			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto("abrirCerradura").at(0);
+			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto("abrirCerradura").at(0).nombre;
 		}
 		if (personaje.tieneEfecto(this.efectoNecesario).length>0){
-			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
+			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre;//abrirCon =>abrirCerradura --llave 
 		}
     if (personaje.tieneEfecto("ataque").length>0){
       console.log(`Personaje tiene efecto: ${typeof personaje.tieneEfecto("ataque")}`)

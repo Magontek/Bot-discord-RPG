@@ -21,7 +21,7 @@ module.exports = class Evento{
         }
         console.log(`Evento intenta pasar al evento: ${siguienteEvento.nombre}`)
         this.narrativa.pasarAEvento(siguienteEvento)
-        return `Elegiste: ${this.nombre}`
+        return ``
     }
     //opciones(personaje) : array(str)toma un personaje y devuelve todas las posibles opciones para ese personaje en ese evento. 
     opciones(){ 

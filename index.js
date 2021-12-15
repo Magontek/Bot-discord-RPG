@@ -31,11 +31,11 @@ client.on('interactionCreate', async interaction => {
 		const entero = parseInt(interaction.customId,10)
 		if(Number.isInteger(entero)){
 			console.log(`${interaction.user.id} Eligio opcion ${entero}`)
-			game.seleccionarOpcionPara(entero, interaction.user, interaction.guild_id)
+			const textoSeleccion = game.seleccionarOpcionPara(entero, interaction.user, interaction.guild_id)
 			const opciones = game.imprimirOpcionesPara(interaction.user , interaction.guild_id)
 			const enunciado = game.imprimirEnunciado(interaction.user , interaction.guild_id)
 			const row = DicordGameHelper.embedEnunciado(opciones)
-			await interaction.update({content: `Descripcion: ${enunciado}`, ephemeral: true, components: [row]})
+			await interaction.update({content: `${textoSeleccion} \n ${enunciado}`, ephemeral: true, components: [row]})
 		}
 	};
 	

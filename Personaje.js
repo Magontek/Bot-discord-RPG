@@ -42,23 +42,23 @@ module.exports = class Personaje {
     }
 
     agregarItem(item){ 
-        if(this.esPosibleAgregarItem(item)){
+        if(this.esPosibleAgregarItem()){
             this.items.push(item)
             return true
         }
         return false
     }
-    esPosibleAgregarItem(item){
-        return maxItems > this.cantidadDeItems()     
+    esPosibleAgregarItem(){
+        return this.maxItems > this.cantidadDeItems()     
     }
      
     agregarPoder(poder){
-        if(this.esPosibleAgregarPoder(poder)){
+        if(this.esPosibleAgregarPoder()){
             this.poderes.push(poder)
         }
     }
-    esPosibleAgregarPoder(poder){
-        return maxPoderes > this.cantidadDePoderes()
+    esPosibleAgregarPoder(){
+        return this.maxPoderes > this.cantidadDePoderes()
     }
 
     usarEfectoDeObjeto(objeto,efecto){
