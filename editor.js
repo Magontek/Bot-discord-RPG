@@ -154,9 +154,8 @@ module.exports = class Editor {
         return this.narrativa
     }
 
+        //Este metodo crea una historia basica de testeo
     static makeDummy(){
-        
-
         //Efectos de la historia //nombre id, si ataca nombre es ataque.
         var ataqueConEspada = new Efecto ("ataque", 205, 10)
         var atacarConEscudo = new Efecto("ataque", 201, 7)
@@ -172,11 +171,11 @@ module.exports = class Editor {
         var llave = new ObjetoUsable("Llave", 16, [abrirCerraduraPesada], "Item", "Cualquiera")
 
         //Obj de enemigos
-        var espadaRota = new ObjetoUsable("Espada Rota", 14, [ataqueConArmaMala], "Item", "EnemigoDebil")
-        var menteDeDios = new ObjetoUsable("Mente Divina", 17, [locura], "Poder", "EnemigoFuerte")
+        var espadaRota = new ObjetoUsable("Espada Rota", 14, [ataqueConArmaMala], "Item", "EnemigoDebil" )
+        var menteDeDios = new ObjetoUsable("Mente Divina", 17, [locura], "Poder", "EnemigoFuerte" )
 
         //Personaje
-        var enemigoDebil = new Personaje("Miedoso", 102, 1, [espadaRota], 1, [], 0, "Enemigo")
+        var enemigoDebil = new Personaje("Miedoso", 102, 1, [espadaRota], 1, [], 0, "Enemigo" )
         var enemigoFuerte = new Personaje("Cthulhu", 103, 50, [], 0, [menteDeDios], 1, "Enemigo" )
 
         //Narrativas
