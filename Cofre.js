@@ -31,13 +31,10 @@ module.exports = class Cofre extends Evento                            // ------
     if (personaje.tieneEfecto("abrirCerradura").length>0){
 			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto("abrirCerradura").at(0).nombre;
 		}
-    console.log(`Personaje tiene efecto: ${this.efectoNecesario.at(0).nombre}`)
 		if (personaje.tieneEfecto(this.efectoNecesario.at(0)).length>0){
-      
 			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto(this.efectoNecesario.at(0)).at(0).nombre;//abrirCon =>abrirCerradura --llave 
 		}
     if (personaje.tieneEfecto("ataque").length>0){
-      
       b=todasOpciones.at(3) + ' con ' + personaje.tieneEfecto("ataque").at(0).nombre;//destruirCon=>ataque
     } 
 
