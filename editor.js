@@ -50,10 +50,6 @@ module.exports = class Editor {
         let habitacionNueva = new Habitacion ( nombre, id, enunciado, efectoNecesario, oculto, conscecuencias )
         this.eventos.push( habitacionNueva )
     }
-
-    devolverEventos() {
-        return this.eventos
-    }
     //Crea un evento(habitacion), lo agrega a la lista de eventos y lo retorna.
     
 
@@ -64,7 +60,6 @@ module.exports = class Editor {
     }
     //Crea un objeto Usable nuevo y lo asigna al array objetos.
     
-
     //creacion de efectos
     crearEfecto( nombre, potencia, cantidadDeUsos ) {
         let efectoNuevo = new Efecto (nombre, potencia, cantidadDeUsos)

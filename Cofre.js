@@ -2,7 +2,8 @@ const Evento = require('./Evento.js')
 //_____________COFRE______________________
 
 module.exports = class Cofre extends Evento                            // ---------------Hereda de Puerta ,no de evento !!
-{ constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,abierto,dureza,contenido)         
+{ 
+  constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,abierto,dureza,contenido)         
   { 
     super(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias)
     this.abierto=abierto;//booleano
@@ -41,8 +42,8 @@ module.exports = class Cofre extends Evento                            // ------
       return this.tomarItem(personaje); // abrir agarra item	
 		}
     else return false
-    }
-      abrirCon(personaje)
+  }
+  abrirCon(personaje)
     {
     if( personaje.tieneEfecto("abrirCerradura")!=null || personaje.tieneEfecto(this.efectoNecesario)!=null )// abrir con llave/abrirCerradura agarra item
     {
@@ -65,7 +66,7 @@ module.exports = class Cofre extends Evento                            // ------
 	  else  var random=Math.random() ;      // math.random genera un numero pseudo aleatorio rango [0, 1)
 	  if(random<=0.5)contenido=null;
  
-	return false
+	  return false
 	}
   
   defenderDeItem(personaje)

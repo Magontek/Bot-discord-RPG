@@ -4,27 +4,31 @@ const Efecto = require ('./Efecto.js')
 module.exports = class Personaje {
     constructor (nombre,id,experiencia,items,maxItems,poderes,maxPoderes,clase){
         this.nombre=nombre;
+        this.id=id;
         this.experiencia=experiencia;
         this.items=items;
         this.maxItems=maxItems;
         this.poderes=poderes;
         this.maxPoderes=maxPoderes;
         this.clase=clase;
-        this.id=id;
     }
     
     getNivel(){ 
         return Math.ceil((this.experiencia/1000));
     }
+
     addExperiencia(int){ 
         this.experiencia + int;
     }
+
     tieneEfecto(efecto){
         return this.itemTieneEfecto(efecto).concat(this.poderTieneEfecto(efecto))
     }
+
     itemTieneEfecto(efecto){
         return this.items.filter(i=>i.contieneEfecto(efecto));  
     }
+
     poderTieneEfecto(efecto){
         return this.poderes.filter(i=>i.contieneEfecto(efecto));  
     }
@@ -38,22 +42,22 @@ module.exports = class Personaje {
     }
 
     agregarItem(item){ 
-        if(this.esPosibleAgregari(item)){
+        if(this.esPosibleAgregarItem(item)){
             this.items.push(item)
             return true
         }
         return false
     }
-    esPosibleAgregari(item){
+    esPosibleAgregarItem(item){
         return maxItems > this.cantidadDeItems()     
     }
      
     agregarPoder(poder){
-        if(this.esPosibleAgregarp(poder)){
+        if(this.esPosibleAgregarPoder(poder)){
             this.poderes.push(poder)
         }
     }
-    esPosibleAgregarp(poder){
+    esPosibleAgregarPoder(poder){
         return maxPoderes > this.cantidadDePoderes()
     }
 

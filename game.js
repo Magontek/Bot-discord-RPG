@@ -90,7 +90,6 @@ module.exports = class Game{
         return this.clasesDePersonaje(historia).find(element => element.nombre == nombreClase)
     }
 
-
     clasesDePersonaje(historia){
         return Editor.getClasesDummy()
         /*

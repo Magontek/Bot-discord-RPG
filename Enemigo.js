@@ -7,7 +7,7 @@ module.exports = class Enemigo extends Evento
 		this.personaje=personaje;
 	}
 
-  // Consecuencias responde en el orden:[muerto, enemigoHuye, personajeHuye, personajeHuyeUsando]
+  	// Consecuencias responde en el orden:[muerto, enemigoHuye, personajeHuye, personajeHuyeUsando]
 
   	opciones(personaje) 
 	{// [muerto, enemigoHuye, personajeHuye, personajeHuyeUsando]
@@ -37,6 +37,7 @@ module.exports = class Enemigo extends Evento
 	defenderDe(personaje)				
 	{ return personaje.getNivel() > (this.getNivel()+this.tieneEfecto("defensa").at(0).potencia );
 	}
+
 	defenderDeItem(personaje,objetoUsable)
 	{return (personaje.getNivel()+objetoUsable.contieneEfecto("ataque").potencia )> (this.getNivel() + this.tieneEfecto("defensa").at(0).potencia );
 	}
@@ -44,13 +45,14 @@ module.exports = class Enemigo extends Evento
 	venceA(personaje,objetoUsable)
 	{return ( personaje.getNivel()+objetoUsable.contieneEfecto("defensa").potencia)<(this.getNivel()+this.tieneEfecto("ataque").potencia);
 	}
+
 	tieneArma()
 	{
     return personaje.arma.tieneEfecto("ataque") ;
 	}
+
 	ganaCombate()
 	{ 
 		return (this.defenderDe(personaje)&&this.venceA(personaje))
 	}
-
 }
