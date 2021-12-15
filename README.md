@@ -12,7 +12,7 @@ Los bot de discord se autentican contra discord usando un token y un clientId un
 }
 
 ## ¿Qué vamos a usar?
-Recomiendo para el desarroyo usar <https://code.visualstudio.com/download>
+Recomiendo usar <https://code.visualstudio.com/download>
 ### API de discord
 La documentación de la api de discord se encuentra en: <https://discord.com/developers/docs/intro>
 
@@ -104,8 +104,6 @@ Glosario y aclaraciones:
 **Clase** a veces es la clase de persona y otras una clase de objeto de programacion. Si no se entiende preguntar.
 
 **Historia** una historia es una narrativa con su conjunto de objetoUsables, eventos y efectos.
-
-
 ### class Narrativa
 Esta clase es la interfaz de los eventos. Siempre apunta al evento actual y va actualizando ese evento en función de las opciones elegidas.
 #### Propiedades
@@ -114,31 +112,36 @@ Esta clase es la interfaz de los eventos. Siempre apunta al evento actual y va a
 | :- | :- |
 |Enunciado : Str|La descripción de la historia|
 |EventoActual : Obj(Evento)|Apunta al evento contra el que está interactuando el personaje|
-#### SelecionarOpcion(int) : str
-Llama a eventoActual.SelecionarOpcion(int) y retorna el resultado.
+#### SelecionarOpcion( int ) : str
+Llama a eventoActual.SelecionarOpcion( int ) y retorna el resultado.
 #### describirEvento() : str
 Retorna eventoActual.enunciado
-#### ImprimirOpciones(personaje) : array(str)
+#### ImprimirOpciones( obj(personaje) ) : array(str)
 Llama a eventoActual.opciones(personaje) y retorna el resultado
+#### pasarAEvento( obj(evento) )
+Cambia el evento actual al evento pasado por parametro.
+
 ### class Evento
 Clase abstracta. No crear objetos de esta clase.
 #### Propiedades
 
 |nombre : Str|El nombre del evento, debe ser legible para humanos.|
 | :- | :- |
+|Id: int|El identificador del evento para encontrarlo mas facil.|
 |narrativa : Obj(Narrativa)|Apunta a su narrativa padre. Esto se usa para cambiar la narrativa actual.|
-|enunciado : Str|El enunciado que se imprimida cuando se entra al evento.|
+|enunciado : Str|El enunciado que se imprima cuando se entra al evento.|
 |efectoNecesario : Array(Efecto)|El efecto necesario para interactuar con el evento.|
-|oculto : Bool|Indica si el objeto esta oculto al jugador.|
+|oculto : Bool|Indica si el objeto está oculto al jugador.|
 |consecuencias : Array(evento)|La lista de eventos a los que se accede desde las opciones de este evento.|
 #### selecionaOpcion(int) : Obj(evento)
 Este método toma un entero y devuelve el evento asignado a ese entero en el array Consecuencias.
-#### opciones(personaje) : array(str)
-Toma un personaje y devuelve todas las posibles opciones para ese personaje en ese evento.
+Usa el método opciones para traducir la opción elegida a la consecuencia.
+#### opciones(personaje) : array(str,indiceDeConsecuencia)
+Toma un personaje y devuelve todas las posibles opciones para ese personaje en ese evento justo al índice de la consecuencia de elegir esa opción.
 ### class Habitacion
 Esta clase extiende la clase abstracta Evento.
 
-Las consecuencias de esta clase no están ordenadas.
+Las consecuencias de esta clase no están pre ordenadas, son los nombres de sus consecuencias..
 #### opciones(personaje) : array(str)
 Extiende el método opciones de la clase Evento.  Retorna el nombre de cada evento de la habitación listado en consecuencias.
 
@@ -149,10 +152,8 @@ Devuelvo opciones para las siguientes condiciones:
   - Si un elemento de consecuencias tiene el flag *oculto* y el personaje no posee el efectoNecesario no se muestra en la lista
   - Si el elemento no tiene el flag *oculto* se muestra en la lista
 
-#### Explorar(personaje) : array(bool)
-Esta clase es una sugerencia para implementar las opciones.
-
-Retorna un array de booleanos que indican cual item de la lista de consecuencias puede ver el personaje.
+#### Explorar( obj(personaje) ) : array(evento)
+Retorna un array de consecuencias que puede ver el personaje. Osea, que no están ocultas.
 ### class Puerta
 Esta clase extiende la clase abstracta Evento.
 
@@ -162,20 +163,20 @@ Consecuencias responde en el orden [abrir,abrircon,destruir,destruircon]
 |abierta : Bool|Determina si la puerta a está abierta o trabada|
 | :- | :- |
 |dureza : Int|Determina qué tan difícil es romper la puerta|
-#### opciones(personaje) : array(str)
+#### opciones( obj(personaje) ) : array(str)
 Extiende el método opciones de la clase Evento.
 
 - Agrega la opción “Abrir ”
 - Agrega la opción “Abrir con: ” si el personaje tiene un ítem con el efecto abrirCerraduras
 - Agrega la opción “Destruir puerta ”
 - Agrega la opción “Destruir puerta con: ” si el personaje posee el ítem con efecto ataque.
-#### defenderDe(personaje)
+#### defenderDe( obj(personaje) ) : Bool
 Este método recibe un personaje y devuelve True si el nivel del personaje supera la dureza de la puerta.
-#### defenderDeItem(personaje, item) ; Bool
+#### defenderDeItem( obj(personaje), obj(item)) : Bool
 Este método recibe un personaje y un ítem y devuelve True si el nivel del personaje más el valor de potencia del efecto ataque del ítem supera la dureza de la puerta.
-#### abrir(personaje) : Bool
+#### abrir( obj(personaje) ) : Bool
 Retorna True si abierto == True
-#### abrirCon(personaje, Item) : Bool
+#### abrirCon( obj(personaje), obj(Item) ) : Bool
 Retorna True si ítem tiene el efecto abrirCerradura
 ### class Cofre
 Esta clase extiende la clase abstracta Evento.
@@ -251,9 +252,9 @@ Extiende el método opciones de la clase Evento.
 - Agrega la opción “Huir”
 - Agrega la opción “Huir usando: ${objeto}” si el personaje posee el ítem con efecto sigilo o velocidad.
 #### defenderDe(personaje) : Bool
-Este método recibe un personaje y devuelve True si el nivel del personaje supera la dureza del enemigo mas el poder el primer objeto con un poder “defender”.
+Este método recibe un personaje y devuelve True si el nivel del personaje supera el nivel del enemigo mas el poder el primer objeto con un poder “defender”.
 #### defenderDeItem(personaje, ObjetoUsable) : Bool
-Este método recibe un personaje y un ítem y devuelve True si el nivel del personaje más el valor de potencia del efecto ataque del ítem supera la dureza del enemigo.
+Este método recibe un personaje y un ítem y devuelve True si el nivel del personaje más el valor de potencia del efecto ataque del ítem supera el nivel mas el poder el primer objeto con un poder “defender” del enemigo
 #### venceA(personaje,ObjetoUsable) : Bool
 Este método recibe un personaje y un objetoUsable. Retorna True si su nivel más el valor de potencia del efecto de ataque que devuelva su primer arma es mayor que el nivel del personaje mas el poder del objeto que se paso como parametro.
 
@@ -268,11 +269,10 @@ Este objeto es una propiedad de los Ítems y Poderes.
 ID: deben ser ataque, defensa, buscartrampas, invisibilidad, abrircerraduras.
 #### Propiedades
 
-|Nombre : Str|Nombre del efecto, es legible por humanos.|
+|nombre : Str|Este es su id, es lo que buscan los eventos para validar acciones. Estan predetermiandos|
 | :- | :- |
-|id : Str|Este es su id, es lo que buscan los eventos para validar acciones. Estan predetermiandos|
-|Potencia : Int|Es un valor abstracto que depende del tipo de efecto|
-|CantidadDeUsos : Int|Es la cantidad de veces que puede ser usado este efecto. Un número negativo se considera infinito.|
+|potencia : Int|Es un valor abstracto que depende del tipo de efecto|
+|cantidadDeUsos : Int|Es la cantidad de veces que puede ser usado este efecto. Un número negativo se considera infinito.|
 #### usar() : bool
 Si cantidadDeUsos>0 resta 1. Si después de eso puedeUsar()==true retorna true
 
@@ -296,17 +296,25 @@ Este es el personaje que usa el jugador.
 Retorna el nivel del personaje calculado como experiencia/1000 redondeado hacia arriba
 #### addExperiencia(int) :
 Agrega la cantidad int de experiencia al personaje
-#### tieneEfecto(efecto) : Array(Efecto)
-Retorna todos los objetos que contengan el efecto.
+#### tieneEfecto(efecto) : Array(Item/poder)
+Retorna todos los items y poderes que contengan el efecto.
+#### itemTieneEfecto( Str(efecto) ) : Array( ObjetoUsable )
+Retorna los items que tenga el efecto
+#### poderTieneEfecto( Str(efecto) ) : Array( ObjetoUsable )
+Retorna los poderes que tenga el efecto
 #### cantidadDeItems() : Int
 Retorna la cantidad de ítems que posee en este momento.
 #### cantidadDePoderes() : Int
 Retorna la cantidad de poderes que posee en este momento.
-#### agregarItem(item) : Bool
-Agrega un item a la lista si maxItems<cantidadDeItems(). Retorna True si es posible agregar el Item.
-#### agregarPoder(poder) : Bool
+#### agregarItem( Obj(item) ) : Bool
+Agrega un ítem a la lista si maxItems<cantidadDeItems(). Retorna True si es posible agregar el Ítem.
+#### esPosibleAgregarItem( Obj(item) ) : Bool
+Responde true si la cantidad de ítems actual es menos que la máxima
+#### agregarPoder( Obj(poder) ) : Bool
 Agrega un poder a la lista si maxPoderes<cantidadDeIPoderes(). Retorna True si es posible agregar el Item.
-#### usarEfectoDeObjeto(objeto, efecto) : Str
+#### esPosibleAgregarPoder( Obj(item) ) : Bool
+Responde true si la cantidad de poderes actual es menos que la máxima
+#### usarEfectoDeObjeto( Obj(objeto), Str(efecto) ) : Str
 Retorna el resultado de efecto.Usar(personaje,objeto)
 ### class ObjetoUsable
 Esta es una clase. Ítem y Poderes aumentan esta clase solo configurando su nombre.
@@ -314,42 +322,80 @@ Esta es una clase. Ítem y Poderes aumentan esta clase solo configurando su nomb
 
 |nombre : Str|Nombre del objeto|
 | :- | :- |
+|Id : Int|Número que identifica el poder|
 |efectos : Array(efecto)|Set de efectos que definen el objeto usable|
 |tipo : Str|Es el tipo de objeto: Ítem o Poder|
 |clase : Str|Es la clase de personaje que puede usar este objeto. Null indica cualquiera|
 
-#### contieneEfecto(efecto) : efecto
+#### contieneEfecto( Str(efecto) ) : Bool
 Retorna el efecto si es que lo contiene. Sino retorna Null.
-#### puedeUsar(efecto) : Bool
+#### getEfecto( Str(efecto) ) : Obj(Efecto)
+Retorna el efecto con el nombre pasado por parametro
+#### puedeUsar( Str(efecto) ) : Bool
 Retorna True si contieneEfecto(efecto)==efecto y efecto.puedeUsar()==true
-#### usar(efecto) : Bool
+#### usar( Str(efecto) ) : Bool
 Retorna True si contieneEfecto(efecto)==efecto y efecto.usar(self)==true.
 ### class Game
 Esta clase es la que se usa para interactuar con la narrativa.
 
 
-|partidas : Array(guld,user,obj(narrativa),personaje)|Este es un array que contiene cuatro campos: <br>guildID, userID, Obj(Narrativa), personaje|
+|<p>partidas : Array( Obj(guildId: guildId,</p><p>`                            `userId: userId,</p><p>`                            `narrativa: narrativa,</p><p>`                            `personaje: personaje</p><p>)</p>|Este array contiene objetos que almacenan la partida de cada jugador en cada server.|
 | :- | :- |
+|<p>Parciales : Array Obj(userID : userId,</p><p>`                        `guildID : guildId,</p><p>`                        `nombrePersonaje : '',</p><p>`                        `clasePersonaje : '',</p><p>`                        `nombrehistoria : ''</p><p>)</p>|Este array contiene objetos que almacenan los datos de la partida en creación de cada jugar en cada server.|
 
-#### crearNarrativa(guild,user,Str(Nombre),personaje) : Obj(Narrativa)
+#### crearPartida(guild,user,Str(Nombre),personaje) : Obj(Narrativa)
 Este método crea todos los objetos de la historia con ese nombre, se queda con el handler del objeto narrativa y lo almacena en un nuevo elemento del array partidas junto con el user y guild que devuelve discord.js y el personaje.
 Solo puede haber una partida para cada par user guild.
 #### listarHistorias() : Array(Str)
 Lista todos los nombres de las carpetas dentro de la carpeta historias.
-La estructura de archivos de una historia es:
-#### partidaDe(user, guild) : Obj(Narrativa)
-Retorna el objeto narrativo que corresponde a ese user y guild.
-#### nuevoPersonaje(nombre, clase)
-Retorna un objeto nuevo de la clase personaje con las propiedades indicadas.
 #### cargarHistoria(nombre) : Obj(Narrativa)
 Retorna una nueva narrativa con ese nombre. Si el nombre no es válido crea una error.
-#### clasesDePersonaje(historia) : array()
-Carga todas las clases de personaje de los JSON en la carpeta ./historias/unaHistoria/clases. Retorna un array con los objetos
+#### partidaDe(user, guild) : Obj(Narrativa)
+Retorna el objeto narrativo que corresponde a ese user y guild.
+#### narrativaDe( Str(userId), Str(guildId) ) : Obj(Narrativa)
+Retorna, si exsite, el objeto narrativa que corresponde al usuario y server indicado.
+#### personajeDe( Str(userId), Str(guildId) ) : Obj(Personaje)
+Retorna, si exsite, el objeto personaje que corresponde al usuario y server indicado.
+#### crearPersonaje( Str(nombre), Str(clase) , Str(historia) ) : Obj(Personaje)
+Retorna un objeto nuevo de la clase personaje con las propiedades indicadas.
+#### imprimirOpcionesPara( Str(userId), Str(guildId) ) : Array(Str)
+Retorna el resultado del objeto historia.imprimirOpciones() de ese usuario en ese servidor.
+#### imprimirEnunciado( Str(userId), Str(guildId) ) : Str
+Retorna el resultado del objeto historia.describirEvento() de ese usuario en ese servidor.
+####
+#### buscarClase( Str(nombreClase), Str(historia) ) : Obj(ClaseDePersonaje)
+Busca la clase de personaje con ese nombre en esa historia, si la encuentra la retorna.
+#### clasesDePersonaje( Str(historia) ) : Array(Obj(ClasesDePersonaje))
+Retorna la lista de clases de Editor.importarClases(historia)
+#### listarClasesDePersonaje( Str(userId), Str(guildId) ) : Array( Str )
+Retorna la lista de los nombres de las clases de personaje para la narrativa cargada en parcial para ese usuario en ese serveridor.
+#### getParcial( Str(userId), Str(guildId) ) : Obj()
+Retorna el personaje parcial para ese usuario en ese servidor.
+#### historiaParcial( Str(userId), Str(guildId), Str(nombreHistoria))
+Asigna un nombre de historia al objeto parcial de ese usuario para ese servidor.
+#### claseParcial( Str(userId), Str(guildId), Str(clasePersonaje))
+Asigna una clase de personaje al objeto parcial de ese usuario para ese servidor.
+#### nombreParcial( Str(userId), Str(guildId), Str(nombrePersonaje))
+Asigna un nombre de personaje al objeto parcial de ese usuario para ese servidor.
+#### parcialCompleto( Str(userId), Str(guildId) ) : Bool
+Indica si el objeto parcial tiene todos sus campos completos
+#### parcial2Personaje( Str(userId), Str(guildId) ) : Obj(Personaje)
+Crea un personaje usando las propiedades del objeto parcial
+#### eliminarPartida( Str(userId), Str(guildId) )
+Elimina del array partidas el elemento que contenta ese userid y guildid
+#### eliminarPartidaIndice( Int(index) )
+Elimina del array partidas la partida de indice Index.
+#### indiceDePartidaDe( Str(userId), Str(guildId) ) : Int
+Retorna el numero de indice de la partida que perteneces a ese usuario en ese servidor
+#### existePartidaDe( Str(userId), Str(guildId) ) : Bool
+Retorna true si existe una partida creada para ese usuario en ese servidor.
+#### seleccionarOpcionPara( Int(entero), Str(userId), Str(guildId) )
+Llama a la narrativa de ese usuario en ese servidor e invoca narrativa.seleccionarOpcion(...)
 ### class ClasesDePersonaje
 Este objeto se usa para inicializar los personajes al comienzo de la partida.
 
 
-|nombreDeClase : Str|Nombre de la clase|
+|nombre : Str|Nombre de la clase|
 | :- | :- |
 |itemInicial : Arry(Obj(item))|La lista de items con las que comienza el personaje|
 |MaxItems : Int|El número máximo de items que puede tener el personaje|
@@ -358,8 +404,7 @@ Este objeto se usa para inicializar los personajes al comienzo de la partida.
 
 ### class Editor
 Esta clase tiene como objetivo crear las historias que luego serán usadas por la clase Game. 
-Se deja planteado la carga y guardado de historias.
-
+Se encarga además de guardar y cargar las narrativa desde almacenamiento.
 
 Ejemplo de uso.
 
@@ -375,14 +420,16 @@ Editor.exportar todo( ‘./’ )
 
 Esto debería crear todos los directorios y archivos.
 
+La estructura de archivos de una historia es:
 
 
-|narrativa : Obj(Narrativa)||
+|narrativa : Obj(Narrativa)|Contiene el objeto narrativa sobre el que se trabaja|
 | :- | :- |
-|eventos : Array(Obj(Eventos))||
-|clases :Array(Obj(ClasesDePersonaje))||
-|enemigos :Array(Obj(personaje))||
-|efectos :Array(Obj(efectos))||
+|eventos : Array(Obj(Eventos))|Contiene una lista de todos los eventos de la narrativa y su clase.|
+|clases :Array(Obj(ClasesDePersonaje))|Contiene una lista de todas las clases de personaje que se pueden usar en la narrativa.|
+|enemigos :Array(Obj(personaje))|Contiene todos los personaje enemigos que se asignan a los eventos de clase Enemigo|
+|efectos :Array(Obj(efectos))|Contiene todos los efectos que se asignan a los objetos usables.|
+|objetos :Array(Obj(ObjetosUsables))|Contiene todos los objetos usables que se asignan a personajes, cofres y bibliotecas.|
 
 #### crearNarrativa(Nombre,Enunciado,EventoActual) : Obj(Narrativa)
 Crea una narrativa nueva y lo asigna a la variable narrativa.
@@ -398,12 +445,36 @@ Crea un evento(habitacion), lo agrega a la lista de eventos y lo retorna.
 Crea un objeto Usable nuevo y lo asigna al array objetos.
 #### crearEfecto(parametrosDeEfecto) : Obj(Efecto)
 Crea un efecto nuevo y lo agrega al array de efectos.
+#### exportarNarrativa()
+Crea el directorio con el nombre de la narrativa y guarda narrativa.JSON
+#### eportarEventos()
+Crea el directorio eventos y almacena los objetos evento cada uno en un archivo .JSON dentro de un directorio con el nombre del tipo de evento.
+#### exportarObjetos()
+Crea el directorio objetos y almacena los objetos objetoUsable cada uno en un archivo .JSON
+#### exportarEfectos()
+Crea el directorio efectos y almacena los objetos efecto cada uno en un archivo .JSON
+#### exportarEnemigos()
+Crea el directorio EvEnemgios y almacena los objetos enemigo cada uno en un archivo .JSON
+
+Crea el directorio Enemigos y almacena los objetos personaje asignados a objetos enemigo cada uno en un archivo .JSON
+#### exportar( Str(dir), Str(nombre) ,Str(objetoJSON))
+Esta clase es la que almacena los archivos JSON en el almacenamiento.
 #### exportarTodo(Direccion) : null
 Exporta todos los arrays que contienen los elementos de la historia y los guarda en la dirección relativa
 #### importarTodo(direccion, nombreDeHistoria) : Obj(narrativa)
 Carga todos los archivos de la dirección relativa que estén dentro de la historia con ese nombreDeHistoria en las propiedades del editor.
-### getNarrativa() : Obj(Narrativa)
+#### importarTodo( Str(direccion), Str(nombreDeHistoria))
+Importa todos los objetos del directorio con el nombre nombreDeHistoria en la direccion direccion y los carga en los arrays correspondientes.
+#### importarClases()
+Importa las clases de personaje en el array clases de personaje.
+#### importarNombresDeHistorias() : Array(Str)
+Retorna un string con los nombre de las historias en el directorio historias
+#### getNarrativa() : Obj(Narrativa)
 Retorna el objeto this.narrativa
+#### static makeDummy() : Obj(Narrativa)
+Crea una historia default con un objeto de cada tipo para propositos de testeo.
+#### static getClasesDummy() : Array(Obj(ClaseDePersoanaje))
+Retorna un string con la clase Guerrero para propósitos de testeo.
 ## Comandos de discord
 ### /listarhistorias
 Muestra una lista con todas las historias disponibles.
@@ -426,7 +497,7 @@ El botón eliminar elimina el elemento en el array de partidas asignado a ese us
 ### /personaje
 Imprime las propiedades del personaje y sus objetos asignados a ese user y guild.
 ## Helpers de Discord
-#### embedPersonaje(personaje) : Obj(Embed)
+#### embedPersonaje( Obj(personaje) ) : Obj(MessageEmbed)
 Retorna un embed que contiene:
 Nombre : ${Nombre} Clase : ${Clase} 
 Nivel : ${Nivel} Experiencia : ${Experiencia}
@@ -446,3 +517,7 @@ Poderes:
   - ?Clase :
 
 - Poder 2 …
+
+#### static embedEnunciado(Array(Str)) : Obj(MessageActionRow)
+Retorna una lista de botones con ids numerados secuencialmente. Se crea un botón por elemento del array pasado por referencia, ese string es el texto que muestra el botón.
+
