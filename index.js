@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
-const Game = require('./game.js')
+const Game = require('./Game.js')
 const DicordGameHelper = require('./helpers/discordGameHelper.js')
 
 
