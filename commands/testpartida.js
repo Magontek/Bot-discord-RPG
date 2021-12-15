@@ -1,8 +1,8 @@
 //Remember to run " node deploy-commands.js " to register your commands!
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed, Interaction } = require("discord.js");
-const Game = require('../game.js')
-const Personaje = require('../personaje.js')
+const Game = require('../Game.js')
+const Personaje = require('../Personaje.js')
 const DicordGameHelper = require('../helpers/discordGameHelper.js')
 
 module.exports = {

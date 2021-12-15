@@ -1,4 +1,4 @@
-const Personaje = require('../personaje.js')
+const Personaje = require('../Personaje.js')
 const { MessageEmbed , MessageActionRow , MessageButton } = require("discord.js");
 
 module.exports = class discordGameHelper{

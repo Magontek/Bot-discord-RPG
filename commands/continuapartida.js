@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageActionRow, MessageButton  } = require("discord.js");
-const Game = require('../game.js')
+const Game = require('../Game.js')
 const DicordGameHelper = require('../helpers/discordGameHelper.js')
 
 module.exports = {
