@@ -21,8 +21,8 @@ module.exports = class Enemigo extends Evento
 		if (personaje.tieneEfecto("sigilo").length>0){
 			b=todasOpciones.at(2) + personaje.tieneEfecto("sigilo").at(0).nombre;
 		}
-		if (personaje.tieneEfecto(this.efectoNecesario).length>0){
-			c=todasOpciones.at(3) + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre;//abrirCon =>abrirCerradura --llave 
+		if (personaje.tieneEfecto(this.efectoNecesario.at(0)).length>0){
+			c=todasOpciones.at(3) + personaje.tieneEfecto(this.efectoNecesario.at(0)).at(0).nombre;//abrirCon =>abrirCerradura --llave 
 		}
 
 		var arrayOpciones = []
