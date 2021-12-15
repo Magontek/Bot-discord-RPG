@@ -91,7 +91,7 @@ module.exports = class Game{
     clasesDePersonaje(historia){
         return Editor.getClasesDummy()
         /*
-        nombreDeClase : Str
+        nombre : Str
         itemInicial : Arry(Obj(item))
         MaxItems : Int
         poderInicial : Array(Obj(Poder))
@@ -101,7 +101,7 @@ module.exports = class Game{
 
     listarClasesDePersonaje(userId, guildId){
         const parcial = this.getParcial(userId, guildId)  
-        if(parcial.nombreHistoria==''){ return "La historia no esta definida, elija una historia" }
+        if(parcial.nombreHistoria==''){ return ["La historia no esta definida, elija una historia"] }
         return this.clasesDePersonaje(parcial.nombreHistoria).map( estaClase => estaClase.nombre );      
     }
 
@@ -112,7 +112,7 @@ module.exports = class Game{
                         guildID : guildId, 
                         nombrePersonaje : '', 
                         clasePersonaje : '', 
-                        nombrehistoria : ''
+                        nombreHistoria : ''
                     });
             this.parciales.push(parcial)
             console.log('Creando nuevo personaje parcial...')

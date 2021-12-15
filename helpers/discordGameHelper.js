@@ -21,6 +21,24 @@ module.exports = class discordGameHelper{
         return embed
     }
 
+
+    /**({userID : userId, 
+        guildID : guildId, 
+        nombrePersonaje : '', 
+        clasePersonaje : '', 
+        nombrehistoria : ''
+    }); */
+    static embedParcial(parcial){
+        const embed = new MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle(`Creando personaje...`)
+        if (parcial.nombrePersonaje) embed.addField('Nombre: ', parcial.nombrePersonaje, true)
+        if (parcial.nombreHistoria) embed.addField('Historia: ', parcial.nombreHistoria, true)
+        if (parcial.clasePersonaje) embed.addField('Clase: ', parcial.clasePersonaje, true)
+
+        return embed
+    }
+
     static embedEnunciado(opciones){
         const row = new MessageActionRow()
 		var index = 0
