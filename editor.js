@@ -183,7 +183,7 @@ module.exports = class Editor {
         var narrativa1 = new Narrativa("Historia de un Gerrero", "Te encuentras al comienzo de la aventura", null)
 
         //Eventos. nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias
-        var eliminado = new Habitacion("Fuiste eliminado", 3, narrativa1, "Fuiste eliminado ¿Deseas volver a jugar?", [], false, [entrada])
+        var eliminado = new Habitacion("Fuiste eliminado", 3, narrativa1, "Fuiste eliminado ¿Deseas volver a jugar?", [], false, [])
         var cofreEscondido = new Cofre("Cofre detras de habitacion", 7, narrativa1, "Ves un lindo cofre", [], false, [puertaHs1,puertaHs1,puertaHs1,puertaHs1], true, 60, [escudo])
         var enemigoFuerte = new Enemigo("Bicho recien despierto", 6, narrativa1, "Despertaste a un bicho malo malo", [], false, [eliminado,eliminado,eliminado,eliminado], enemigoFuerte)
         var puertaHs2 = new Puerta("Puerta de acero reforzado", 5, narrativa1, "Vez una puerta inrompible", [abrirCerraduraPesada], false, [cofreEscondido,cofreEscondido,cofreEscondido,cofreEscondido], false, 25)
@@ -194,6 +194,7 @@ module.exports = class Editor {
         var entrada = new Puerta("Puerta de madera", 0, narrativa1, "Vas a entrar a la mazmorra", [], false, [primerEnemigo,primerEnemigo,primerEnemigo,primerEnemigo], true, 0) //tiene que ser id = 0
 
         cofreEscondido.consecuencias = [puertaHs1]
+        eliminado.consecuencias = [entrada]
         narrativa1.eventoActual = entrada
 
         this.narrativa = narrativa1
