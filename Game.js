@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Personaje = require('./personaje.js')
+const Personaje = require('./Personaje.js')
 const Narrativa = require('./Narrativa.js')
 const Editor = require('./Editor.js')
 
