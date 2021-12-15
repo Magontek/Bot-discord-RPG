@@ -12,7 +12,7 @@ module.exports = class Cofre extends Evento                            // ------
   }
   opciones(personaje)
   {  
-    var todasOpciones=["Abrir","Abrir Cofre Con${objeto}","Destruir","Destruir Cofre Con ${objeto}"];
+    var todasOpciones=["Abrir","Abrir Cofre con ","Destruir","Destruir Cofre Con "];
 
 		var a = ''
 		var b = ''
@@ -23,7 +23,10 @@ module.exports = class Cofre extends Evento                            // ------
 		if (personaje.tieneEfecto(this.efectoNecesario).length>0){
 			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
 		}
-    if (personaje.tieneEfecto("ataque").length>0) b=todasOpciones.at(3) + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre;//destruirCon=>ataque
+    if (personaje.tieneEfecto("ataque").length>0){
+      console.log(`Personaje tiene efecto: ${typeof personaje.tieneEfecto("ataque")}`)
+      b=todasOpciones.at(3) + ' con ' + personaje.tieneEfecto("ataque").at(0).nombre;//destruirCon=>ataque
+    } 
 
     var arrayOpciones = []
     

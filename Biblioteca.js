@@ -12,7 +12,7 @@ module.exports = class Biblioteca extends Evento
 	//efecto necesario =["Ataque","desactivar Trampa ","detectarTrampas","defensa"]
 	opciones()
 	{
-        var todasOpciones=["Buscar","Buscar Con","Tomar Libro Para Adquirir Poder","Tomar Libro Con Para Adquirir Poder"];
+        var todasOpciones=["Buscar","Buscar Con","Tomar Libro","Tomar Libro Con "];
 
 		var a = ''
 		var b = ''

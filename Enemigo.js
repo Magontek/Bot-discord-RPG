@@ -11,25 +11,26 @@ module.exports = class Enemigo extends Evento
 
   	opciones(personaje) 
 	{// [muerto, enemigoHuye, personajeHuye, personajeHuyeUsando]
-		var todasOpciones=["Atacar","Atacar Con ${objeto}","Huir con ${objeto}","Huir Usando ${objeto}"];
+		var todasOpciones=["Atacar","Atacar Con ","Huir usando ","Huir Usando "];
 
 		var a = ''
 		var b = ''
+		var c = ''
 
 		if (personaje.tieneEfecto("ataque").length>0 ) a=todasOpciones.at(1) + personaje.tieneEfecto("ataque").at(0) ;    //atacarCon => ataque
 		if (personaje.tieneEfecto("sigilo").length>0){
-			a=todasOpciones.at(3) + personaje.tieneEfecto("sigilo").at(0);
+			b=todasOpciones.at(2) + personaje.tieneEfecto("sigilo").at(0);
 		}
 		if (personaje.tieneEfecto(this.efectoNecesario).length>0){
-			a=todasOpciones.at(3) + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
+			c=todasOpciones.at(3) + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
 		}
 
 		var arrayOpciones = []
 
 		arrayOpciones.push(todasOpciones.at(0))		// atacar
 		arrayOpciones.push(a)			           	// atacar con
-		arrayOpciones.push(todasOpciones.at(2))	   	// huir
-		arrayOpciones.push(b)					   	// huir con
+		arrayOpciones.push(b)	   	// huir
+		arrayOpciones.push(c)					   	// huir con
 
 		return arrayOpciones ;
 	}
