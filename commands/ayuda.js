@@ -7,10 +7,8 @@ module.exports = {
 		.setDescription('Ayuda del juego'),
 	async execute(interaction,game) {
 
-        return interaction.reply({content: `Para crear un personaje use:
+        return interaction.reply({content: `Para crear una nueva partida use:
         /nuevapartida nombre [Nombre del personaje]
-        /nuevapartida historia [Elija un nombre de historia valido]
-        /nuevapartida clase [Elija una clase valida de personaje]
 
         Para listar las clases validas primero asigne un nombre de historia y luego use
         /listarclases
