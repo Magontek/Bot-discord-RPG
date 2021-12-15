@@ -1,6 +1,18 @@
-﻿# RPG de texto
+# TP final de la materia Técnicas Avanzadas de Programación
+En este tp realizamos un bot de discord usando la API de discord "discord.js".
+Esta aplicacion es un juego de rol de texto que permite crear historias personalizadas.
+
+## RPG de texto
+## Para probar el programa
+Los bot de discord se autentican contra discord usando un token y un clientId unico del bot. Para poder testear esta aplicacion es necesario crear un archivo config.JSON que contenga estos datos en el siguiente formato:
+
+{
+    "clientId": "",
+	"token": ""
+}
+
 ## ¿Qué vamos a usar?
-Recomiendo usar <https://code.visualstudio.com/download>
+Recomiendo para el desarroyo usar <https://code.visualstudio.com/download>
 ### API de discord
 La documentación de la api de discord se encuentra en: <https://discord.com/developers/docs/intro>
 
