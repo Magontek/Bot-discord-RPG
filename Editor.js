@@ -149,7 +149,11 @@ module.exports = class Editor {
         return this.narrativa
     }
 
-        //Este metodo crea una historia basica de testeo
+    static importarNombresDeHistoriasDummy(){
+        return ['default']
+    }
+
+    //Este metodo crea una historia basica de testeo
     static makeDummy(){
         //Efectos de la historia //nombre id, si ataca nombre es ataque.
         var ataqueConEspada = new Efecto ("ataque", 205, 10)

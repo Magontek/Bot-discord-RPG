@@ -22,6 +22,6 @@ module.exports = {
         La hoja de personaje no se actualiza automaticamente\n
         Para actualizarla usar:\n
         /personaje
-        `, ephemeral: true, components: [row]})
+        `, ephemeral: true})
 	},
 };

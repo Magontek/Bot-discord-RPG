@@ -29,9 +29,7 @@ module.exports = class Game{
     /*Lista todos los nombres de las carpetas dentro de la carpeta historias. 
     Y toma la descripcion del archivos narrativa.JSON*/
     listarHistorias(){
-        return [{label:'Nombre1', description:'Descripcion1', value: '0',},
-                {label:'Nombre2', descripcion:'Descripcion2', value: '1',},
-                ];
+        return Editor.importarNombresDeHistoriasDummy()
     };
 
     cargarHistoria(nombre){

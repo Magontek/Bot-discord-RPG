@@ -46,7 +46,6 @@ module.exports = class Cofre extends Evento                            // ------
     arrayOpciones.push(b);				  //DESTRUIR CON
 
     return arrayOpciones 
-  
   }
   
 	abrir(personaje){
