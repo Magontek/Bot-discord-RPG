@@ -19,6 +19,10 @@ module.exports = class Evento{
     {
         if( numero>this.opciones(personaje).length ) return console.error('Opcion invalida') ;  // sin item 
         const siguienteEvento = this.consecuencias.at(numero)
+        if(!siguienteEvento){
+            console.log(`La opcion ${numero} es invalida`)
+            return `La opcion ${numero} es invalida`
+        }
         console.log(`Evento intenta pasar al evento: ${siguienteEvento.nombre}`)
         this.narrativa.pasarAEvento(siguienteEvento)
         return `Elegiste: ${this.nombre}`

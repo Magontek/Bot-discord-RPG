@@ -158,7 +158,7 @@ module.exports = class Game{
 
     eliminarPartidaIndice(index){
         if (index > -1) {
-            array.splice(index, 1);
+            this.partidas.splice(index, 1);
         }
     }
 

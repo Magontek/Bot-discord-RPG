@@ -17,6 +17,6 @@ module.exports = {
                 .setLabel("Eliminar")
                 .setStyle("SECONDARY"),
 		);
-		return interaction.reply({content: "Main menu", ephemeral: true, components: [row]});
+		return interaction.reply({content: "¿Terminar partida?", ephemeral: true, components: [row]});
 	},
 };

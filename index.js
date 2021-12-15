@@ -25,23 +25,22 @@ client.on('interactionCreate', async interaction => {
 	if (interaction.isButton()){
 		if(interaction.customId=='eliminarpartida'){
 			game.eliminarPartida( interaction.user, interaction.guild_id )
-			return interaction.reply({content: `Partida eliminada`, ephemeral: true});
+			console.log(`${interaction.user.id} Elimino su partida`)
+			return interaction.update({content: `Partida terminada`, ephemeral: true , components: []});
 		}
 		const entero = parseInt(interaction.customId,10)
 		if(Number.isInteger(entero)){
-			console.log(`Eligio opcion ${entero}`)
+			console.log(`${interaction.user.id} Eligio opcion ${entero}`)
 			game.seleccionarOpcionPara(entero, interaction.user, interaction.guild_id)
 			const opciones = game.imprimirOpcionesPara(interaction.user , interaction.guild_id)
-			console.log(`Opciones: ${opciones}`)
 			const enunciado = game.imprimirEnunciado(interaction.user , interaction.guild_id)
 			const row = DicordGameHelper.embedEnunciado(opciones)
 			await interaction.update({content: `Descripcion: ${enunciado}`, ephemeral: true, components: [row]})
 		}
 	};
-	console.log(`Recibio interaccion: ${interaction.customId}`)
 	
 	if (!interaction.isCommand()) return;
-
+	console.log(`${interaction.user.id} envia ${interaction.commandName}`)
 	const command = client.commands.get(interaction.commandName);
 
 	if (!command) return;
