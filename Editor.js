@@ -30,25 +30,25 @@ module.exports = class Editor {
     //creacion de eventos
     crearPuerta(nombre, id, enunciado, efectoNecesario, oculto, conscecuencias, abierta, dureza ) {
         let puertaNueva = new Puerta (nombre, id, enunciado, efectoNecesario, oculto, conscecuencias, abierta, dureza)
-        this.eventos.push(puertaNueva)
+        this.eventos.push({evento:puertaNueva,tipo:'puerta'})
     }
     //Crea un evento(puerta), lo agrega a la lista de eventos y lo retorna.
     
     crearCofre( nombre, id, enunciado, efectoNecesario, oculto, conscecuencias, abierta, dureza, contenido ) {
         let cofreNuevo = new Cofre (nombre, id, enunciado, efectoNecesario, oculto, conscecuencias, abierta, dureza, contenido)
-        this.eventos.push(cofreNuevo)
+        this.eventos.push({evento: cofreNuevo,tipo:'cofre'})
     }
     //Crea un evento(cofre), lo agrega a la lista de eventos y lo retorna.
     
     crearEvEnemigo( nombre, id, enunciado, efectoNecesario, oculto, conscecuencias, personaje ) {
         let evEnemigoNuevo = new Enemigo (nombre, id, enunciado, efectoNecesario, oculto, conscecuencias, personaje)
-        this.eventos.push( evEnemigoNuevo )
+        this.eventos.push(evEnemigoNuevo)
     }  
     //Crea un evento(enemigo), lo agrega a la lista de eventos y lo retorna.
     
     crearHabitacion( nombre, id, enunciado, efectoNecesario, oculto, conscecuencias ) {
         let habitacionNueva = new Habitacion ( nombre, id, enunciado, efectoNecesario, oculto, conscecuencias )
-        this.eventos.push( habitacionNueva )
+        this.eventos.push( {evento: habitacionNueva,tipo: 'habitacion'} )
     }
     //Crea un evento(habitacion), lo agrega a la lista de eventos y lo retorna.
     
@@ -68,7 +68,7 @@ module.exports = class Editor {
 
     crearEnemigo( nombre, id, experiencia, items, maxitems, poderes, maxpoderes, clase ) {
         let enemigoNuevo = new Personaje( nombre, id, experiencia, items, maxitems, poderes, maxpoderes, clase )
-        this.enemigos.push( enemigoNuevo )
+        this.enemigos.push( {evento:enemigoNuevo,tipo:'enemigo'} )
     }
     //Crea un efecto nuevo y lo agrega al array de efectos.
 
@@ -84,7 +84,7 @@ module.exports = class Editor {
 
     eportarEventos(){
         this.eventos.foreach( elemento => {
-            const eventoJSON = JSON.stringify(elemento)
+            const eventoJSON = JSON.stringify(elemento.evento)
             const dir = `./Historias/${narrativa.nombre}/Eventos/${elemento.tipo}`
             this.exportar(dir,elemento.evento.nombre,eventoJSON)
         })
@@ -93,21 +93,21 @@ module.exports = class Editor {
     exportarObjetos(){ 
         this.objetos.foreach( elemento => {
             const eventoJSON = JSON.stringify(elemento)
-            const dir = `./Historias/${narrativa.nombre}/Objetos/${elemento.nombre}`
+            const dir = `./Historias/${narrativa.nombre}/Objetos`
             this.exportar(dir,elemento.objeto.nombre,eventoJSON)
         })
     }
     exportarEfectos(){
         this.efectos.foreach( elemento => {
             const eventoJSON = JSON.stringify(elemento)
-            const dir = `./Historias/${narrativa.nombre}/Efectos/${elemento.nombre}`
+            const dir = `./Historias/${narrativa.nombre}/Efectos`
             this.exportar(dir,elemento.efecto.nombre,eventoJSON)
         })
     }
     exportarEnemigos(){
         this.enemigos.foreach( elemento => {
             const eventoJSON = JSON.stringify(elemento)
-            const dir = `./Historias/${narrativa.nombre}/Enemigos/${elemento.nombre}`
+            const dir = `./Historias/${narrativa.nombre}/Enemigos`
             this.exportar(dir,elemento.enemigo.nombre,eventoJSON)
         })
     }
