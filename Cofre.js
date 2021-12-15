@@ -17,12 +17,12 @@ module.exports = class Cofre extends Evento                            // ------
 		var b = ''
     
     if (personaje.tieneEfecto("abrirCerradura").length>0){
-			a=todasOpciones.at(1) + personaje.tieneEfecto("abrirCerradura").at(0);
+			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto("abrirCerradura").at(0);
 		}
 		if (personaje.tieneEfecto(this.efectoNecesario).length>0){
-			a=todasOpciones.at(1) + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
+			a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
 		}
-    if (personaje.tieneEfecto("ataque")!=null) b=todasOpciones.at(3) //destruirCon=>ataque
+    if (personaje.tieneEfecto("ataque").length>0) b=todasOpciones.at(3) + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre;//destruirCon=>ataque
 
     var arrayOpciones = []
     

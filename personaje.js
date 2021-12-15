@@ -20,13 +20,13 @@ module.exports = class Personaje {
         this.experiencia + int;
     }
     tieneEfecto(efecto){
-        return this.itemTieneEfecto(efecto) || this.poderTieneEfecto(efecto)
+        return this.itemTieneEfecto(efecto).concat(this.poderTieneEfecto(efecto))
     }
     itemTieneEfecto(efecto){
-        return this.items.some(i=>i.contieneEfecto(efecto)!=null);  
+        return this.items.filter(i=>i.contieneEfecto(efecto)!=null);  
     }
     poderTieneEfecto(efecto){
-        return this.poderes.some(i=>i.contieneEfecto(efecto)!=null);  
+        return this.poderes.filter(i=>i.contieneEfecto(efecto)!=null);  
     }
 
     cantidadDeItems(){
