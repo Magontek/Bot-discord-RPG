@@ -23,10 +23,10 @@ module.exports = class Personaje {
         return this.itemTieneEfecto(efecto).concat(this.poderTieneEfecto(efecto))
     }
     itemTieneEfecto(efecto){
-        return this.items.filter(i=>i.contieneEfecto(efecto)!=null);  
+        return this.items.filter(i=>i.contieneEfecto(efecto));  
     }
     poderTieneEfecto(efecto){
-        return this.poderes.filter(i=>i.contieneEfecto(efecto)!=null);  
+        return this.poderes.filter(i=>i.contieneEfecto(efecto));  
     }
 
     cantidadDeItems(){

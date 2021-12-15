@@ -1,21 +1,19 @@
-module.exports = class Efecto {}
-
-class Efecto { 
-    constructor (Nombre,Potencia,CantidadDeUsos){
-        this.Nombre=Nombre;
-        this.Potencia=Potencia;
-        this.CantidadDeUsos=CantidadDeUsos;
+module.exports = class Efecto { 
+    constructor (nombre,potencia,cantidadDeUsos){
+        this.nombre=nombre;
+        this.potencia=potencia;
+        this.cantidadDeUsos=cantidadDeUsos;
     }
 
     usar(){
      
-       if (this.CantidadDeUsos > 0){
-            this.cantidadDeUsos=this.CantidadDeUsos-1
+       if (this.cantidadDeUsos > 0){
+            this.cantidadDeUsos=this.cantidadDeUsos-1
         }
         if(puedeUsar()==true){
             return true
         }
-        if(this.CantidadDeUsos==0){
+        if(this.cantidadDeUsos==0){
             return false
         }
 

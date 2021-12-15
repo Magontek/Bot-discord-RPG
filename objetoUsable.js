@@ -8,12 +8,11 @@ module.exports = class ObjetoUsable {
     }
 
     contieneEfecto(efecto){
-        if(this.efecto == efecto){
-            return efecto;
-        }
-        else{
-            return null;
-        }
+        return this.efectos.some(unefecto => unefecto.nombre == efecto)
+    }
+
+    getEfecto(efecto){
+        return this.efectos.find(unefecto => unefecto.nombre == efecto)
     }
 
     puedeUsar(efecto){
@@ -23,5 +22,4 @@ module.exports = class ObjetoUsable {
     usar(efecto){
         return (contieneEfecto(efecto==efecto)) && (efecto.usar(self))//booleano
     }
-
 }

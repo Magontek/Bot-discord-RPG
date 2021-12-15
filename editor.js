@@ -202,9 +202,9 @@ module.exports = class Editor {
     }
 
     static getClasesDummy(){
-        var percepcion = new Efecto("detectar", 200, 20)
-        var ataqueConEspada = new Efecto ("ataque", 205, 10)
-        var defensaConEspada = new Efecto("defensa", 201, 5)
+        var percepcion = new Efecto("detectar", 10, 20)
+        var ataqueConEspada = new Efecto ("ataque", 10, 10)
+        var defensaConEspada = new Efecto("defensa", 10, 5)
         //Objs iniciales
         var espadaSimple = new ObjetoUsable("Espada corta", 11, [ataqueConEspada, defensaConEspada], "Item", "Guerrero")
         var observador = new ObjetoUsable("Observador", 15, [percepcion], "Poder", "Cualquiera")

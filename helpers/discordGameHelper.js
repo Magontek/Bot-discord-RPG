@@ -9,16 +9,15 @@ module.exports = class discordGameHelper{
                     .setDescription('Es es el heroe de la historia')
                     .addField('Experiencia', personaje.experiencia.toString(), true)
                     .addField('Clase:', personaje.clase, true)
-                    .addFields(
-                        { name: 'Items', value: 'Efectos' },
-                        { name: '\u200B', value: '\u200B' },
-                    )
-/*
-        personaje.items.forEach(element => {
-            if(element){
-                embed.addField({ name: `Nombre: ${element.nombre}` , value: `Efectos: ${element.efectos.toString()}`})
-            }
-        })*/
+
+        if(personaje.items!=[]){
+            personaje.items.forEach(element => {
+                if(element){
+                    embed.addField( `${element.nombre}` , `Efectos: ${element.efectos.map(efecto => efecto.nombre).toString()}`)
+                }
+            })
+        }
+        
         return embed
     }
 
