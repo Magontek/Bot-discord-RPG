@@ -14,20 +14,20 @@ Los bot de discord se autentican contra discord usando un token y un clientId un
 ## ¿Qué vamos a usar?
 Recomiendo usar <https://code.visualstudio.com/download>
 ### API de discord
-La documentación de la api de discord se encuentra en: <https://discord.com/developers/docs/intro>
+La documentación de la api de discord se encuentra en: <https://discord.com/developers/docs/intro> y en <https://discord.js.org/#/docs/main/stable/general/welcome>
 
 Aca hay un tutorial de como se programa un bot de discord usando discord.js en node.js
-
 <https://discordjs.guide/preparations/setting-up-a-bot-application.html#what-is-a-token-anyway>
 
 ### Node.js
-Lo más sencillo es programar desde Node.js que se descarga desde aca <https://nodejs.org/>
+Lo más sencillo es ejecutar esta aplicacion usando node.js
+Que se descarga desde aca <https://nodejs.org/>
 
-Dentro de Node.js hay que ejecutar:
+Dentro del directorio raiz hay que ejecutar:
 
-*npm install discord.js*
+*npm install*
 
-Eso instala la API de discord. Si en el instalador de Node.js tocaron la casilla de que instale lo que necesite entonces no es necesario ejecutar el npm.
+Esto instala todas las librerias necesarias listadas en el archivo package.JSON
 
 Explicación completa de que es node.js y como usarlo <https://www.nodebeginner.org/index-es.html>
 ## ¿Qué vamos a programar?
@@ -53,7 +53,7 @@ Explicación completa de que es node.js y como usarlo <https://www.nodebeginner.
   - Ej: 
     Evento1: Hay una puerta en frente tuyo
 1) Opción 1: Intentar abrir
-1) Opcion 2: golpear
+2) Opcion 2: golpear
 
 
 
@@ -64,8 +64,8 @@ Explicación completa de que es node.js y como usarlo <https://www.nodebeginner.
 Ej.: Evento1: Hay una puerta en frente tuyo
 
 1) Opción 1: Intentar abrir
-1) Opcion 2: golpear
-1) Opción 3(masa): Golpear con la masa
+2) Opcion 2: golpear
+3) Opción 3(masa): Golpear con la masa
 
 `	`Esta última opción sólo aparece si el personaje tiene una masa.
 
@@ -74,10 +74,10 @@ Ej.: Evento1: Hay una puerta en frente tuyo
 
 ### Flujo del juego
 1. Crear partida con el comando /nuevapartida
-1. Jugador crea el personaje en el menú que aparece en pantalla
-1. Se imprime el primer evento usando narrativa.imprimirOpciones()
-1. Jugador elije una opcion del menu que llama narrativa.seleccionaOpcion(opt) que hace narrativa.evento = narrativa.evento.seleccionaOpcion(opt) e imprime las opciones
-1. Continua así hasta el último evento llamado “end” en donde imprime el enunciado.
+2. Jugador crea el personaje en el menú que aparece en pantalla
+3. Se imprime el primer evento usando narrativa.imprimirOpciones()
+4. Jugador elije una opcion del menu que llama narrativa.seleccionaOpcion(opt) que hace narrativa.evento = narrativa.evento.seleccionaOpcion(opt) e imprime las opciones
+5. Continua así hasta el último evento llamado “end” en donde imprime el enunciado.
 
 ### API de discord
 Necesitamos averiguar:
