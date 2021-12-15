@@ -21,12 +21,12 @@ opciones(personaje)
     var b = ''
 
     if (personaje.tieneEfecto("abrirCerradura").length>0){
-        a=todasOpciones.at(1) + personaje.tieneEfecto("abrirCerradura").at(0);
+        a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto("abrirCerradura").at(0).nombre;
     }
     if (personaje.tieneEfecto(this.efectoNecesario).length>0){
-        a=todasOpciones.at(1) + personaje.tieneEfecto(this.efectoNecesario).at(0);//abrirCon =>abrirCerradura --llave 
+        a=todasOpciones.at(1) + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre;//abrirCon =>abrirCerradura --llave 
     }
-    if (personaje.tieneEfecto("ataque")!=[] ) b=todasOpciones.at(3) + personaje.tieneEfecto("ataque").at(0);//destruirCon=>ataque
+    if (personaje.tieneEfecto("ataque")!=[] ) b=todasOpciones.at(3) + ' con ' + personaje.tieneEfecto("ataque").at(0).nombre;//destruirCon=>ataque
 
     var arrayOpciones = []
     arrayOpciones.push(todasOpciones.at(0));      // ABRIR 
