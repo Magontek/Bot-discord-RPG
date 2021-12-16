@@ -17,8 +17,12 @@ module.exports = class Biblioteca extends Evento
 		var a = ''
 		var b = ''
 
-		if( personaje.tieneEfecto("ataque").length>0 ) a=todasOpciones.at(1)  + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre
-		if( personaje.tieneEfecto("desactivarTrampa").length>0) b=todasOpciones.at(3)  + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre
+		if( personaje.tieneEfecto("ataque").length>0 ){
+			a=todasOpciones.at(1)  + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre
+		} 
+		if( personaje.tieneEfecto("desactivarTrampa").length>0){
+			b=todasOpciones.at(3)  + ' con ' + personaje.tieneEfecto(this.efectoNecesario).at(0).nombre
+		} 
 		arrayOpciones.push(todasOpciones.at(0));      // ABRIR
 		arrayOpciones.push(a);   			      // ABRIR CON
 		arrayOpciones.push(todasOpciones.at(2));	  //DESTRUIR
@@ -27,7 +31,7 @@ module.exports = class Biblioteca extends Evento
 		return arrayOpciones ;
 	}
    
-   revisar()
+   	revisar()
 	{
 	   	let strTrampas=["hay trampa/s","no hay trampas"]
 		if( personaje.tieneEfecto("detectarTrampas")    )
@@ -35,9 +39,16 @@ module.exports = class Biblioteca extends Evento
 		else return  this.strTrampas.at(1);
 	}
    
-   tomarPoder(personaje)
+   	tomarPoder(personaje)
 	{
-		if (trampa>0) personaje.tieneEfecto("defensa").potencia>this.trampa;
+		if (trampa>0){
+			if(personaje.tieneEfecto("defensa").potencia>this.trampa){
+				return true
+			}
+			else{
+				return false
+			}
+		} 
 		else return true
 	}
 	//Si el jugador intenta tomar el poder y la biblioteca tiene una trampa se compara el poder del primer item con defensa del jugador.

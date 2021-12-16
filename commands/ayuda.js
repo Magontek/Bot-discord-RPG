@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const DicordGameHelper = require('../helpers/discordGameHelper.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()

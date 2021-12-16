@@ -18,6 +18,7 @@ module.exports = class Efecto {
         }
 
     }
+    
     puedeUsar(){
       
        if (this.cantidadDeUsos != 0){

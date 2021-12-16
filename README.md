@@ -476,21 +476,12 @@ Crea una historia default con un objeto de cada tipo para propositos de testeo.
 #### static getClasesDummy() : Array(Obj(ClaseDePersoanaje))
 Retorna un string con la clase Guerrero para propósitos de testeo.
 ## Comandos de discord
-### /listarhistorias
-Muestra una lista con todas las historias disponibles.
-### /listarclases
-Muestra una lista de las clases disponibles.
-### /nuevapartida nombre [Nombre de personaje]
+### /nuevapartida  [Nombre de personaje]
 Busca una personaje en creación para este guild y user y le asigna nombre
-### /nuevapartida clase [Clase de personaje]
-Busca una personaje en creación para este guild y user y le asigna clase de personaje
-### /nuevapartida historia [Nombre de historia]
-Busca una personaje en creación para este guild y user y le asigna una historia
 ### /continuapartida
 Repite el último evento asignado a ese user y guild.en el canal en el que se escribió el comando.
-### /comenzarpartida
-Imprime lo mismo que continuar partida pero con un mensaje de bienvenida.
 ### /terminarpartida
+Permite eleiminar la partida en curso
 Muestra botones de eliminar, cancelar.
 
 El botón eliminar elimina el elemento en el array de partidas asignado a ese user y guild.
@@ -521,3 +512,7 @@ Poderes:
 #### static embedEnunciado(Array(Str)) : Obj(MessageActionRow)
 Retorna una lista de botones con ids numerados secuencialmente. Se crea un botón por elemento del array pasado por referencia, ese string es el texto que muestra el botón.
 
+### A futuro
+- Emprolijar el codigo. Hay mucho codigo que puede ser reducido.
+- Unificar las clases de evento en una sola colocando todas las propiedades dentro de un objeto para simplificar el constructor y unificar metodos.
+- Implementar getters y setters

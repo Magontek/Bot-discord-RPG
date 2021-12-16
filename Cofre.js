@@ -1,7 +1,7 @@
 const Evento = require('./Evento.js')
 //_____________COFRE______________________
 
-module.exports = class Cofre extends Evento                            // ---------------Hereda de Puerta ,no de evento !!
+module.exports = class Cofre extends Evento
 { 
   constructor(nombre,id,narrativa,enunciado,efectoNecesario,oculto,consecuencias,abierto,dureza,contenido)         
   { 
@@ -49,7 +49,7 @@ module.exports = class Cofre extends Evento                            // ------
   }
   
 	abrir(personaje){
-		if(abierto)
+		if(this.abierto)
 		{
       return this.tomarItem(personaje); // abrir agarra item	
 		}
@@ -59,7 +59,7 @@ module.exports = class Cofre extends Evento                            // ------
     {
     if( personaje.tieneEfecto("abrirCerradura")!=null || personaje.tieneEfecto(this.efectoNecesario)!=null )// abrir con llave/abrirCerradura agarra item
     {
-      abierto=true;
+      this.abierto=true;
       return this.tomarItem(personaje);
     }
     else return false
@@ -68,7 +68,7 @@ module.exports = class Cofre extends Evento                            // ------
 
   tomarItem(personaje)
   {   
-    if( !personaje.agregarItem(contenido)) contenido=null;           // Agrega el item del cofre a la lista de ítems ,si el personaje está usando contenido=null-------------------------
+    if( !personaje.agregarItem(this.contenido)) this.contenido=null;           // Agrega el item del cofre a la lista de ítems ,si el personaje está usando contenido=null-------------------------
   }
 
 
@@ -76,7 +76,7 @@ module.exports = class Cofre extends Evento                            // ------
   { 
 	  if(personaje.getNivel()>this.dureza) return true;
 	  else  var random=Math.random() ;      // math.random genera un numero pseudo aleatorio rango [0, 1)
-	  if(random<=0.5)contenido=null;
+	  if(random<=0.5) this.contenido=null;
  
 	  return false
 	}
@@ -85,7 +85,7 @@ module.exports = class Cofre extends Evento                            // ------
   {
     if((personaje.getNivel()+personaje.tieneEfecto("ataque").potencia  )>this.dureza)return true;
     else 	var random=Math.random()        // math.random genera un numero pseudo aleatorio rango [0, 1)
-    if(random<=0.5)contenido=null
+    if(random<=0.5) this.contenido=null
     return false;
   }
 }
